@@ -2,7 +2,7 @@ name: Example for alert with commit comment
 on:
   push:
     branches:
-      - develop
+      - master
 
 jobs:
   benchmark:

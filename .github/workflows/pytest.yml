@@ -2,7 +2,7 @@ name: Python Example with pytest
 on:
   push:
     branches:
-      - develop
+      - master
 
 jobs:
   benchmark:
