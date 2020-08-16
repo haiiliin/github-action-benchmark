@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1597560510237,
+  "lastUpdate": 1597576868395,
   "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -86,6 +86,49 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0003058035662843394",
             "extra": "mean: 2.098794806451662 msec\nrounds: 496"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.60",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "commit": {
+          "author": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "committer": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "distinct": true,
+          "id": "757f5e04a5731097ab08c7cde377b7279f753e10",
+          "message": "‼️ BREAKING: Remove commit author/comitter\n\nThis is not necassary information, since it can be otained from the commit id/url",
+          "timestamp": "2020-08-16T12:20:38+01:00",
+          "tree_id": "655d4c8668a329c394f3218ea905ddffd33b6479",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/757f5e04a5731097ab08c7cde377b7279f753e10"
+        },
+        "date": 1597576866994,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 57582.07560929028,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000004421796750797308",
+            "extra": "mean: 17.366515350805802 usec\nrounds: 46512"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 481.9071164602018,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00023208354381800428",
+            "extra": "mean: 2.075088675480443 msec\nrounds: 416"
           }
         ]
       }
