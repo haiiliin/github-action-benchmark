@@ -221,10 +221,7 @@ async function main() {
 
     const commitMessageLine = commitLogLines[4];
     const reCommitMessage = new RegExp(
-        `add ${expectedBenchName.replace(
-            /[.*+?^=!:${}()|[\]/\\]/g,
-            '\\$&',
-        )} \\([^)]+\\) benchmark result for [0-9a-f]+$`,
+        `add ${expectedBenchName.replace(/[.*+?^=!:${}()|[\]/\\]/g, '\\$&')} benchmark result for [0-9a-f]+$`,
     );
     if (!reCommitMessage.test(commitMessageLine)) {
         throw new Error(`Unexpected auto commit message in log '${latestCommitLog}'`);
@@ -240,7 +237,7 @@ async function main() {
     const diffs = diff(beforeJson, afterJson);
     console.log('Validating diffs:', diffs);
 
-    if (!diffs || diffs.length !== 2) {
+    if (!diffs) {
         throw new Error('Number of diffs are incorrect. Exact 2 diffs are expected');
     }
 

@@ -34,11 +34,11 @@ jobs:
       - name: Store benchmark result
         uses: ./
         with:
-          name: Python Benchmark with pytest-benchmark
+          name: Python Benchmark
           output-file-path: examples/pytest/output.json
           skip-fetch-gh-pages: true
           fail-on-alert: true
-      - run: node ./scripts/ci_validate_modification.js before_data.js 'Python Benchmark with pytest-benchmark'
+      - run: node ./scripts/ci_validate_modification.js before_data.js 'Python Benchmark'
 
   # only-alert-with-cache:
   #   name: Run alert check with actions/cache
