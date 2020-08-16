@@ -91,9 +91,11 @@
               const { index } = items[0];
               const data = dataset[index];
               const lines = [data.commit.message + '\n', data.commit.timestamp]
-              lines.push('\nCPU:')
-              for (const [key, value] of Object.entries(data.cpu)) {
-                lines.push(`  ${key}: ${value}`)
+              if (data.cpu) {
+                lines.push('\nCPU:')
+                for (const [key, value] of Object.entries(data.cpu)) {
+                  lines.push(`  ${key}: ${value}`)
+                }
               }
               return '\n' + lines.join('\n') + '\n';
             },
