@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1597553302892,
+  "lastUpdate": 1597559568054,
   "entries": {
     "Rust Benchmark": [
       {
@@ -22885,6 +22885,49 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.00025405105970798355",
             "extra": "mean: 2.1252724433734205 msec\nrounds: 415"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.30",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "commit": {
+          "author": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "committer": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "distinct": true,
+          "id": "15843dcd02183faaf763bbd8d58c5299f298bb54",
+          "message": "Update README.md",
+          "timestamp": "2020-08-16T07:32:12+01:00",
+          "tree_id": "b02b06dcf3dff5727c159a71d0c97c25f30fa399",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/15843dcd02183faaf763bbd8d58c5299f298bb54"
+        },
+        "date": 1597559566409,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 46428.71819249373,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000008295029566141144",
+            "extra": "mean: 21.538393454111617 usec\nrounds: 31348"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 405.1601670824259,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0003185205121993302",
+            "extra": "mean: 2.4681597087913127 msec\nrounds: 364"
           }
         ]
       }
