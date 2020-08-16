@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1597586661210,
+  "lastUpdate": 1597586848477,
   "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -258,6 +258,49 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.00018751262429057323",
             "extra": "mean: 2.4897592718445942 msec\nrounds: 412"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.30",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "commit": {
+          "author": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "committer": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "distinct": true,
+          "id": "9a1ddf82b2fddad237839ebdb9b7171203f89e60",
+          "message": "fix",
+          "timestamp": "2020-08-16T15:06:54+01:00",
+          "tree_id": "70e6f6172cb5b026aff867f477436115f662d161",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/9a1ddf82b2fddad237839ebdb9b7171203f89e60"
+        },
+        "date": 1597586847067,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 54754.670113798005,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000018583853904632226",
+            "extra": "mean: 18.263282345079876 usec\nrounds: 43291"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 432.77449043166195,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00036915781241880834",
+            "extra": "mean: 2.310672237179624 msec\nrounds: 468"
           }
         ]
       }
