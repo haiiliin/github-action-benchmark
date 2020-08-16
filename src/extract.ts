@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs';
 import * as github from '@actions/github';
+import * as sys from 'systeminformation';
 import { Config } from './config';
 
 export interface BenchmarkResult {
@@ -27,10 +28,18 @@ interface Commit {
     url: string;
 }
 
+interface CpuData {
+    speed: string; // in GHz
+    cores: number;
+    physicalCores: number;
+    processors: number;
+}
+
 export interface Benchmark {
     commit: Commit;
     date: number;
     benches: BenchmarkResult[];
+    cpu?: CpuData;
 }
 
 export interface PytestBenchmarkJson {
@@ -177,7 +186,10 @@ export async function extractResult(config: Config): Promise<Benchmark> {
 
     const commit = getCommit();
 
+    const { speed, cores, physicalCores, processors } = await sys.cpu();
+
     return {
+        cpu: { speed, cores, physicalCores, processors },
         commit,
         date: Date.now(),
         benches,
