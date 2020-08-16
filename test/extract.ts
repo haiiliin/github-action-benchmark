@@ -6,8 +6,6 @@ import { BenchmarkResult } from '../src/extract';
 const dummyWebhookPayload = {
     // eslint-disable-next-line @typescript-eslint/camelcase
     head_commit: {
-        author: null,
-        committer: null,
         id: '123456789abcdef',
         message: 'this is dummy',
         timestamp: 'dummy timestamp',
@@ -161,12 +159,6 @@ describe('extractResult()', function() {
             outputFilePath,
         };
         const { commit } = await extractResult(config);
-        const expectedUser = {
-            name: 'user',
-            username: 'user',
-        };
-        A.deepEqual(commit.author, expectedUser);
-        A.deepEqual(commit.committer, expectedUser);
         A.equal(commit.id, 'abcdef0123456789');
         A.equal(commit.message, 'this is title');
         A.equal(commit.timestamp, 'repo updated at timestamp');

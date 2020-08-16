@@ -5,8 +5,6 @@ window.BENCHMARK_DATA = {
         "Test benchmark": [
             {
                 "commit": {
-                    "author": { "email": "dummy@example.com", "name": "User", "username": "user" },
-                    "committer": { "email": "dummy@example.com", "name": "User", "username": "user" },
                     "distinct": false,
                     "id": "prev commit id",
                     "message": "dummy message",

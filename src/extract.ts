@@ -11,15 +11,7 @@ export interface BenchmarkResult {
     extra?: string;
 }
 
-interface GitHubUser {
-    email?: string;
-    name: string;
-    username: string;
-}
-
 interface Commit {
-    author: GitHubUser;
-    committer: GitHubUser;
     distinct?: unknown; // Unused
     id: string;
     message: string;
@@ -138,15 +130,8 @@ function getCommit(): Commit {
     const id: string = pr.head.sha;
     const timestamp: string = pr.head.repo.updated_at;
     const url = `${pr.html_url}/commits/${id}`;
-    const name: string = pr.head.user.login;
-    const user = {
-        name,
-        username: name, // XXX: Fallback, not correct
-    };
 
     return {
-        author: user,
-        committer: user,
         id,
         message,
         timestamp,

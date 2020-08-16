@@ -148,17 +148,10 @@ describe('writeBenchmark()', function() {
 
     // Utilities for test data
     const lastUpdate = Date.now() - 10000;
-    const user = {
-        email: 'dummy@example.com',
-        name: 'User',
-        username: 'user',
-    };
     const repoUrl = 'https://github.com/user/repo';
 
-    function commit(id = 'commit id', message = 'dummy message', u = user) {
+    function commit(id = 'commit id', message = 'dummy message') {
         return {
-            author: u,
-            committer: u,
             distinct: false,
             id,
             message,
