@@ -45,8 +45,6 @@ All benchmark charts from above workflows are gathered in GitHub pages:
 
 https://rhysd.github.io/github-action-benchmark/dev/bench/
 
-
-
 ## Screenshots
 
 ### Charts on GitHub Pages
