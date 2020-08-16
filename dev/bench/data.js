@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1591796792063,
+  "lastUpdate": 1597539659377,
   "entries": {
     "Rust Benchmark": [
       {
@@ -22739,6 +22739,43 @@ window.BENCHMARK_DATA = {
             "extra": "mean: 2.4110147870819794 msec\nrounds: 418"
           }
         ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "committer": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "distinct": true,
+          "id": "a0a4279367fdf9e1c0a88b248e90255120707e6a",
+          "message": "Update pytest.yml",
+          "timestamp": "2020-08-16T02:00:29+01:00",
+          "tree_id": "f98b83fae2f767656d2cf4ebe2970adea7daf553",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/a0a4279367fdf9e1c0a88b248e90255120707e6a"
+        },
+        "date": 1597539657791,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 49394.76689729129,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000009325470436814066",
+            "extra": "mean: 20.245059604782504 usec\nrounds: 40651"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 385.2744497095119,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0003750227675792134",
+            "extra": "mean: 2.5955523413347996 msec\nrounds: 375"
+          }
+        ]
       }
     ],
     "C++ Benchmark": [
@@ -27428,5 +27465,5 @@ window.BENCHMARK_DATA = {
       }
     ]
   },
-  "repoUrl": "https://github.com/rhysd/github-action-benchmark"
+  "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark"
 }
