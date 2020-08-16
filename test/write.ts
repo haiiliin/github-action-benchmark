@@ -779,6 +779,7 @@ describe('writeBenchmark()', function() {
             for (const p of [
                 path.join('data-dir', 'data.js'),
                 path.join('data-dir', 'index.html'),
+                path.join('data-dir', 'benchmark.css'),
                 'new-data-dir',
                 path.join('with-index-html', 'data.js'),
             ]) {
@@ -856,6 +857,7 @@ describe('writeBenchmark()', function() {
                 fetch ? ['pull', [token, 'gh-pages']] : undefined,
                 ['cmd', ['add', path.join(dir, 'data.js')]],
                 addIndexHtml ? ['cmd', ['add', path.join(dir, 'index.html')]] : undefined,
+                addIndexHtml ? ['cmd', ['add', path.join(dir, 'benchmark.css')]] : undefined,
                 ['cmd', ['commit', '-m', 'add Test benchmark benchmark result for current commit id']],
                 autoPush ? ['push', [token, 'gh-pages']] : undefined,
                 ['cmd', ['checkout', '-']], // Return from gh-pages
@@ -1040,7 +1042,7 @@ describe('writeBenchmark()', function() {
 
                 const afterDate = Date.now();
 
-                eq(t.gitHistory, gitSpy.history);
+                eq(t.gitHistory, gitSpy.history, 'git history');
 
                 ok(await isDir(t.config.benchmarkDataDirPath));
                 ok(await isFile(path.join(t.config.benchmarkDataDirPath, 'index.html')));

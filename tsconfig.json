@@ -25,7 +25,6 @@
     "src/extract.ts",
     "src/git.ts",
     "src/write.ts",
-    "src/default_index_html.ts",
     "test/extract.ts",
     "test/config.ts",
     "test/git.ts",

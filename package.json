@@ -31,6 +31,9 @@
     "url": "https://github.com/rhysd/github-action-benchmark/issues"
   },
   "homepage": "https://github.com/rhysd/github-action-benchmark#readme",
+  "directories": {
+    "assets:": "./src/assets"
+  },
   "dependencies": {
     "@actions/core": "^1.2.3",
     "@actions/exec": "^1.0.3",

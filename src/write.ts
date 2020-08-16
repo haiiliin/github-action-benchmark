@@ -6,7 +6,6 @@ import * as github from '@actions/github';
 import * as git from './git';
 import { Benchmark, BenchmarkResult } from './extract';
 import { Config } from './config';
-import { DEFAULT_INDEX_HTML } from './default_index_html';
 
 export type BenchmarkSuites = { [name: string]: Benchmark[] };
 export interface DataJson {
@@ -51,9 +50,24 @@ async function addIndexHtmlIfNeeded(dir: string) {
         // Continue
     }
 
-    await fs.writeFile(indexHtml, DEFAULT_INDEX_HTML, 'utf8');
+    await fs.copyFile(path.join(__dirname, 'assets/default_index.html'), indexHtml);
     await git.cmd('add', indexHtml);
     console.log('Created default index.html at', indexHtml);
+}
+
+async function addCSSIfNeeded(dir: string) {
+    const indexCss = path.join(dir, 'benchmark.css');
+    try {
+        await fs.stat(indexCss);
+        core.debug(`Skipped to create default benchmark.css since it is already existing: ${indexCss}`);
+        return;
+    } catch (_) {
+        // Continue
+    }
+
+    await fs.copyFile(path.join(__dirname, 'assets/benchmark.css'), indexCss);
+    await git.cmd('add', indexCss);
+    console.log('Created default benchmark.css at', indexCss);
 }
 
 interface Alert {
@@ -367,6 +381,7 @@ async function writeBenchmarkToGitHubPagesWithRetry(
 
     await git.cmd('add', dataPath);
     await addIndexHtmlIfNeeded(benchmarkDataDirPath);
+    await addCSSIfNeeded(benchmarkDataDirPath);
     await git.cmd('commit', '-m', `add ${name} benchmark result for ${bench.commit.id}`);
 
     if (githubToken && autoPush) {

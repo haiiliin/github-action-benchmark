@@ -237,6 +237,7 @@ async function main() {
     const diffs = diff(beforeJson, afterJson);
     console.log('Validating diffs:', diffs);
 
+    // if (!diffs || diffs.length !== 2) {
     if (!diffs) {
         throw new Error('Number of diffs are incorrect. Exact 2 diffs are expected');
     }
