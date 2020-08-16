@@ -51,6 +51,7 @@ git pull
 git rm -rf --ignore-unmatch node_modules
 rm -rf node_modules  # remove node_modules/.cache
 mkdir -p src/assets
+rm -rf src/assets
 
 mv .release/action.yml .
 mv .release/*.js ./src/
@@ -58,7 +59,7 @@ mv .release/assets ./src/
 mv .release/*.json .
 mv .release/node_modules .
 
-git add -f action.yml ./src/*.js package.json package-lock.json node_modules
+git add -f action.yml ./src/*.js ./src/assets package.json package-lock.json node_modules
 set +x
 
 echo "Done. Please check 'git diff --cached' to verify changes. If ok, add version tag and push it to remote"
