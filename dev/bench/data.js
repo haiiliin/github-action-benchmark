@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1597551986400,
+  "lastUpdate": 1597553302892,
   "entries": {
     "Rust Benchmark": [
       {
@@ -22848,6 +22848,43 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0003266475018279374",
             "extra": "mean: 2.6890617894742546 msec\nrounds: 456"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "committer": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "distinct": true,
+          "id": "6ab3e8d1dc1f69dd6cc9bbc4cbecbccd2ac0209b",
+          "message": "Update ci.yml",
+          "timestamp": "2020-08-16T05:47:53+01:00",
+          "tree_id": "f64bd33387d1dad2ca61779daae5bac14c2bf612",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/6ab3e8d1dc1f69dd6cc9bbc4cbecbccd2ac0209b"
+        },
+        "date": 1597553301411,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 58620.76693012774,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000004149237893265088",
+            "extra": "mean: 17.05880104216202 usec\nrounds: 37038"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 470.52790954778084,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00025405105970798355",
+            "extra": "mean: 2.1252724433734205 msec\nrounds: 415"
           }
         ]
       }
