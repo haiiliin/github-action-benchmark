@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1597585425367,
+  "lastUpdate": 1597586661210,
   "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -215,6 +215,49 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.00036344097986127955",
             "extra": "mean: 2.5430816744188522 msec\nrounds: 473"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.60",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "commit": {
+          "author": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "committer": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "distinct": true,
+          "id": "441ba3fea22c0d17ffb54935636e3c13e3160459",
+          "message": "👌 IMPROVE: Add commit messge append option",
+          "timestamp": "2020-08-16T15:03:50+01:00",
+          "tree_id": "fb6e68e2862e63926814ef549f612d56058ddaee",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/441ba3fea22c0d17ffb54935636e3c13e3160459"
+        },
+        "date": 1597586659575,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 47238.69364861351,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000025872324364099215",
+            "extra": "mean: 21.169086669469124 usec\nrounds: 38168"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 401.6452559524469,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00018751262429057323",
+            "extra": "mean: 2.4897592718445942 msec\nrounds: 412"
           }
         ]
       }
