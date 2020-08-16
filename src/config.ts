@@ -21,6 +21,7 @@ export interface Config {
     alertCommentCcUsers: string[];
     externalDataJsonPath: string | undefined;
     maxItemsInChart: number | null;
+    chartXAxis: 'id' | 'date';
 }
 
 const RE_UINT = /^\d+$/;
@@ -194,6 +195,16 @@ function validateAlertThreshold(alertThreshold: number | null, failThreshold: nu
     }
 }
 
+function validateChartXAxis(chartXAxis: string): 'id' | 'date' {
+    if (chartXAxis === 'id') {
+        return chartXAxis;
+    }
+    if (chartXAxis === 'date') {
+        return chartXAxis;
+    }
+    throw new Error(`'chart-xaxis' value must be 'id' or 'date' but got ${chartXAxis}`);
+}
+
 export async function configFromJobInput(): Promise<Config> {
     let outputFilePath: string = core.getInput('output-file-path');
     const ghPagesBranch: string = core.getInput('gh-pages-branch');
@@ -211,6 +222,7 @@ export async function configFromJobInput(): Promise<Config> {
     const alertCommentCcUsers = getCommaSeparatedInput('alert-comment-cc-users');
     let externalDataJsonPath: undefined | string = core.getInput('external-data-json-path');
     const maxItemsInChart = getUintInput('max-items-in-chart');
+    const chartXAxisValue = core.getInput('chart-xaxis');
     let failThreshold = getPercentageInput('fail-threshold');
 
     outputFilePath = await validateOutputFilePath(outputFilePath);
@@ -233,6 +245,7 @@ export async function configFromJobInput(): Promise<Config> {
     if (failThreshold === null) {
         failThreshold = alertThreshold;
     }
+    const chartXAxis = validateChartXAxis(chartXAxisValue);
 
     return {
         name,
@@ -252,5 +265,6 @@ export async function configFromJobInput(): Promise<Config> {
         externalDataJsonPath,
         maxItemsInChart,
         failThreshold,
+        chartXAxis,
     };
 }

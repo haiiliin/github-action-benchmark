@@ -10,9 +10,6 @@ inputs:
     description: 'Name of the benchmark. This value must be identical among all benchmarks'
     required: true
     default: 'Benchmark'
-  commit-msg-append:
-    description: 'Append to end of commit message.'
-    required: false
   output-file-path:
     description: 'A path to file which contains the benchmark output'
     required: true
@@ -31,6 +28,9 @@ inputs:
     description: 'Push GitHub Pages branch to remote automatically. This option requires github-token input'
     required: false
     default: false
+  commit-msg-append:
+    description: 'Append to end of generated commit message.'
+    required: false
   skip-fetch-gh-pages:
     description: 'Skip pulling GitHub Pages branch before generating an auto commit'
     required: false
@@ -69,6 +69,10 @@ inputs:
   max-items-in-chart:
     description: 'Max data points in a benchmark chart to avoid making the chart too busy. Value must be unsigned integer. No limit by default'
     required: false
+  chart-xaxis:
+    description: 'X-axis labels to use, commit "id" or "date"'
+    required: false
+    default: id
 
 runs:
   using: 'node12'

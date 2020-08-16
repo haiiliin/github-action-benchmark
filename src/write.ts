@@ -11,6 +11,7 @@ export type BenchmarkSuites = { [name: string]: Benchmark[] };
 export interface DataJson {
     lastUpdate: number;
     repoUrl: string;
+    xAxis?: 'id' | 'date';
     entries: BenchmarkSuites;
 }
 interface Assets {
@@ -20,9 +21,10 @@ interface Assets {
 }
 
 export const SCRIPT_PREFIX = 'window.BENCHMARK_DATA = ';
-const DEFAULT_DATA_JSON = {
+const DEFAULT_DATA_JSON: DataJson = {
     lastUpdate: 0,
     repoUrl: '',
+    xAxis: 'id',
     entries: {},
 };
 
@@ -288,18 +290,14 @@ async function handleAlert(benchName: string, curSuite: Benchmark, prevSuite: Be
     }
 }
 
-function addBenchmarkToDataJson(
-    benchName: string,
-    bench: Benchmark,
-    data: DataJson,
-    maxItems: number | null,
-): Benchmark | null {
+function addBenchmarkToDataJson(benchName: string, bench: Benchmark, data: DataJson, config: Config): Benchmark | null {
     // eslint-disable-next-line @typescript-eslint/camelcase
     const htmlUrl = github.context.payload.repository?.html_url ?? '';
 
     let prevBench: Benchmark | null = null;
     data.lastUpdate = Date.now();
     data.repoUrl = htmlUrl;
+    data.xAxis = config.chartXAxis;
 
     // Add benchmark result
     if (data.entries[benchName] === undefined) {
@@ -317,10 +315,11 @@ function addBenchmarkToDataJson(
 
         suites.push(bench);
 
-        if (maxItems !== null && suites.length > maxItems) {
-            suites.splice(0, suites.length - maxItems);
+        const { maxItemsInChart } = config;
+        if (maxItemsInChart !== null && suites.length > maxItemsInChart) {
+            suites.splice(0, suites.length - maxItemsInChart);
             core.debug(
-                `Number of data items for '${benchName}' was truncated to ${maxItems} due to max-items-in-charts`,
+                `Number of data items for '${benchName}' was truncated to ${maxItemsInChart} due to max-items-in-charts`,
             );
         }
     }
@@ -349,7 +348,6 @@ async function writeBenchmarkToGitHubPagesWithRetry(
         githubToken,
         autoPush,
         skipFetchGhPages,
-        maxItemsInChart,
     } = config;
     const dataPath = path.join(benchmarkDataDirPath, 'data.js');
     const isPrivateRepo = github.context.payload.repository?.private ?? false;
@@ -366,7 +364,7 @@ async function writeBenchmarkToGitHubPagesWithRetry(
     await io.mkdirP(benchmarkDataDirPath);
 
     const data = await loadDataJs(dataPath);
-    const prevBench = addBenchmarkToDataJson(name, bench, data, maxItemsInChart);
+    const prevBench = addBenchmarkToDataJson(name, bench, data, config);
 
     await storeDataJs(dataPath, data);
 
@@ -435,9 +433,6 @@ async function writeBenchmarkToGitHubPages(bench: Benchmark, config: Config): Pr
     let output;
     try {
         output = await writeBenchmarkToGitHubPagesWithRetry(bench, config, assets, 10);
-    } catch (err) {
-        console.log(err);
-        throw err;
     } finally {
         // `git switch` does not work for backing to detached head
         await git.cmd('checkout', '-');
@@ -464,9 +459,10 @@ async function writeBenchmarkToExternalJson(
     jsonFilePath: string,
     config: Config,
 ): Promise<Benchmark | null> {
-    const { name, maxItemsInChart, saveDataFile } = config;
+    const { name, saveDataFile } = config;
     const data = await loadDataJson(jsonFilePath);
-    const prevBench = addBenchmarkToDataJson(name, bench, data, maxItemsInChart);
+    data.xAxis = config.chartXAxis;
+    const prevBench = addBenchmarkToDataJson(name, bench, data, config);
 
     if (!saveDataFile) {
         core.debug('Skipping storing benchmarks in external data file');

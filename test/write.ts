@@ -189,6 +189,7 @@ describe('writeBenchmark()', function() {
             externalDataJsonPath: dataJson,
             maxItemsInChart: null,
             failThreshold: 2.0,
+            chartXAxis: 'id',
         };
 
         const savedRepository = gitHubContext.payload.repository;
@@ -827,6 +828,7 @@ describe('writeBenchmark()', function() {
             externalDataJsonPath: undefined,
             maxItemsInChart: null,
             failThreshold: 2.0,
+            chartXAxis: 'id',
         };
 
         function gitHistory(
