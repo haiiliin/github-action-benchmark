@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1597576868395,
+  "lastUpdate": 1597584747938,
   "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -129,6 +129,49 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.00023208354381800428",
             "extra": "mean: 2.075088675480443 msec\nrounds: 416"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.60",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "commit": {
+          "author": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "committer": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "distinct": true,
+          "id": "a32af0cd555c52d4502d41960da993b0533b1fdd",
+          "message": "♻️ REFACTOR: extract index.html JS",
+          "timestamp": "2020-08-16T14:31:54+01:00",
+          "tree_id": "6c1879d7bfe407da1c9f4a2ffaa655e0e6de573e",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/a32af0cd555c52d4502d41960da993b0533b1fdd"
+        },
+        "date": 1597584746524,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 62955.73976798859,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000007820144139739467",
+            "extra": "mean: 15.884175194911695 usec\nrounds: 46297"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 519.0239352294622,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0003982466802823572",
+            "extra": "mean: 1.9266934184025573 msec\nrounds: 576"
           }
         ]
       }
