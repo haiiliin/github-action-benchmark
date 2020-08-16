@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1597539659377,
+  "lastUpdate": 1597551600211,
   "entries": {
     "Rust Benchmark": [
       {
@@ -22774,6 +22774,43 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0003750227675792134",
             "extra": "mean: 2.5955523413347996 msec\nrounds: 375"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "committer": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "distinct": true,
+          "id": "8c265fe3df28799bdd443b93f3286fc53d00c8ed",
+          "message": "move index HTML to assets\n\nand split out CSS",
+          "timestamp": "2020-08-16T05:19:26+01:00",
+          "tree_id": "b07178bc4bec41a3eafa490d8745d0d0a0ff589e",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/8c265fe3df28799bdd443b93f3286fc53d00c8ed"
+        },
+        "date": 1597551598838,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 57551.39979102047,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000007182271786101171",
+            "extra": "mean: 17.375771981762053 usec\nrounds: 38168"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 460.2512103321213,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00038112418174004043",
+            "extra": "mean: 2.1727264970762192 msec\nrounds: 513"
           }
         ]
       }
