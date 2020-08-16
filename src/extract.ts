@@ -8,6 +8,7 @@ export interface BenchmarkResult {
     value: number;
     range?: string;
     unit: string;
+    group?: string | null;
     extra?: string;
 }
 
@@ -100,6 +101,10 @@ export interface PytestBenchmarkJson {
     version: string;
 }
 
+function precise(num: number, sfigs = 5) {
+    return Number.parseFloat(`${num}`).toPrecision(sfigs);
+}
+
 function getHumanReadableUnitValue(seconds: number): [number, string] {
     if (seconds < 1.0e-6) {
         return [seconds * 1e9, 'nsec'];
@@ -146,12 +151,13 @@ function extractPytestResult(output: string): BenchmarkResult[] {
         return json.benchmarks.map(bench => {
             const stats = bench.stats;
             const name = bench.fullname;
+            const group = bench.group;
             const value = stats.ops;
             const unit = 'iter/sec';
-            const range = `stddev: ${stats.stddev}`;
+            const range = `stddev: ${precise(stats.stddev)}`;
             const [mean, meanUnit] = getHumanReadableUnitValue(stats.mean);
-            const extra = `mean: ${mean} ${meanUnit}\nrounds: ${stats.rounds}`;
-            return { name, value, unit, range, extra };
+            const extra = `mean: ${precise(mean)} ${meanUnit}\nrounds: ${stats.rounds}`;
+            return { name, value, unit, range, group, extra };
         });
     } catch (err) {
         throw new Error(

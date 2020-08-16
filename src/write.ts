@@ -15,6 +15,7 @@ export interface DataJson {
 }
 interface Assets {
     index: string;
+    js: string;
     css: string;
 }
 
@@ -372,6 +373,7 @@ async function writeBenchmarkToGitHubPagesWithRetry(
 
     await addFileToGHPages(benchmarkDataDirPath, 'index.html', assets.index);
     await addFileToGHPages(benchmarkDataDirPath, 'benchmark.css', assets.css);
+    await addFileToGHPages(benchmarkDataDirPath, 'main.js', assets.js);
 
     await git.cmd('commit', '-m', `add ${name} benchmark result for ${bench.commit.id}`);
 
@@ -419,6 +421,7 @@ async function writeBenchmarkToGitHubPages(bench: Benchmark, config: Config): Pr
     const assets: Assets = {
         index: await fs.readFile(path.join(__dirname, 'assets/default_index.html'), 'utf8'),
         css: await fs.readFile(path.join(__dirname, 'assets/benchmark.css'), 'utf8'),
+        js: await fs.readFile(path.join(__dirname, 'assets/main.js'), 'utf8'),
     };
     if (!skipFetchGhPages) {
         await git.cmd('fetch', 'origin', `${ghPagesBranch}:${ghPagesBranch}`);

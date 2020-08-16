@@ -773,6 +773,7 @@ describe('writeBenchmark()', function() {
                 path.join('data-dir', 'data.js'),
                 path.join('data-dir', 'index.html'),
                 path.join('data-dir', 'benchmark.css'),
+                path.join('data-dir', 'main.js'),
                 'new-data-dir',
                 path.join('with-index-html', 'data.js'),
             ]) {
@@ -851,6 +852,7 @@ describe('writeBenchmark()', function() {
                 ['cmd', ['add', path.join(dir, 'data.js')]],
                 addIndexHtml ? ['cmd', ['add', path.join(dir, 'index.html')]] : undefined,
                 addIndexHtml ? ['cmd', ['add', path.join(dir, 'benchmark.css')]] : undefined,
+                addIndexHtml ? ['cmd', ['add', path.join(dir, 'main.js')]] : undefined,
                 ['cmd', ['commit', '-m', 'add Test benchmark benchmark result for current commit id']],
                 autoPush ? ['push', [token, 'gh-pages']] : undefined,
                 ['cmd', ['checkout', '-']], // Return from gh-pages

@@ -31,23 +31,26 @@ describe('extractResult()', function() {
 
     const normalCases: Array<{
         expected: BenchmarkResult[];
-        file?: string;
+        file: string;
     }> = [
         {
+            file: 'pytest_output.json',
             expected: [
                 {
                     name: 'bench.py::test_fib_10',
-                    range: 'stddev: 0.000006175090189861328',
+                    group: null,
+                    range: 'stddev: 0.0000061751',
                     unit: 'iter/sec',
                     value: 41513.272817492856,
-                    extra: 'mean: 24.08868133322941 usec\nrounds: 38523',
+                    extra: 'mean: 24.089 usec\nrounds: 38523',
                 },
                 {
                     name: 'bench.py::test_fib_20',
-                    range: 'stddev: 0.0001745301654140968',
+                    group: 'other',
+                    range: 'stddev: 0.00017453',
                     unit: 'iter/sec',
                     value: 335.0049328331567,
-                    extra: 'mean: 2.9850306726618627 msec\nrounds: 278',
+                    extra: 'mean: 2.9850 msec\nrounds: 278',
                 },
             ],
         },
@@ -55,30 +58,34 @@ describe('extractResult()', function() {
             file: 'pytest_several_units.json',
             expected: [
                 {
-                    extra: 'mean: 149.95610248628836 nsec\nrounds: 68536',
+                    extra: 'mean: 149.96 nsec\nrounds: 68536',
+                    group: null,
                     name: 'bench.py::test_fib_1',
-                    range: 'stddev: 2.9351731952139377e-8',
+                    range: 'stddev: 2.9352e-8',
                     unit: 'iter/sec',
                     value: 6668618.238403659,
                 },
                 {
                     name: 'bench.py::test_fib_10',
-                    range: 'stddev: 0.000005235937482008476',
+                    group: null,
+                    range: 'stddev: 0.0000052359',
                     unit: 'iter/sec',
                     value: 34652.98828915334,
-                    extra: 'mean: 28.85754012484424 usec\nrounds: 20025',
+                    extra: 'mean: 28.858 usec\nrounds: 20025',
                 },
                 {
                     name: 'bench.py::test_fib_20',
-                    range: 'stddev: 0.0003737982822178215',
+                    group: null,
+                    range: 'stddev: 0.00037380',
                     unit: 'iter/sec',
                     value: 276.8613383807958,
-                    extra: 'mean: 3.611916368852473 msec\nrounds: 122',
+                    extra: 'mean: 3.6119 msec\nrounds: 122',
                 },
                 {
-                    extra: 'mean: 2.0038430469999997 sec\nrounds: 5',
+                    extra: 'mean: 2.0038 sec\nrounds: 5',
+                    group: null,
                     name: 'bench.py::test_sleep_2',
-                    range: 'stddev: 0.0018776587251587858',
+                    range: 'stddev: 0.0018777',
                     unit: 'iter/sec',
                     value: 0.49904108083570886,
                 },
@@ -87,9 +94,8 @@ describe('extractResult()', function() {
     ];
 
     for (const test of normalCases) {
-        it(`extracts benchmark output for ${test.file ?? `pytest_output.txt`}`, async function() {
-            const file = test.file ?? `pytest_output.txt`;
-            const outputFilePath = path.join(__dirname, 'data', 'extract', file);
+        it(`extracts benchmark output for ${test.file}`, async function() {
+            const outputFilePath = path.join(__dirname, 'data', 'extract', test.file);
             const config = {
                 outputFilePath,
             };
@@ -110,7 +116,7 @@ describe('extractResult()', function() {
 
     // it('raises an error when no output found', async function() {
     //     const config = {
-    //         outputFilePath: path.join(__dirname, 'data', 'extract', 'pytest_output.txt'),
+    //         outputFilePath: path.join(__dirname, 'data', 'extract', 'pytest_output.json'),
     //     };
     //     await A.rejects(extractResult(config), /^Error: No benchmark result was found in /);
     // });
@@ -154,7 +160,7 @@ describe('extractResult()', function() {
                 },
             },
         };
-        const outputFilePath = path.join(__dirname, 'data', 'extract', 'pytest_output.txt');
+        const outputFilePath = path.join(__dirname, 'data', 'extract', 'pytest_output.json');
         const config = {
             outputFilePath,
         };
@@ -167,7 +173,7 @@ describe('extractResult()', function() {
 
     it('raises an error when commit information is not found in webhook payload', async function() {
         dummyGitHubContext.payload = {};
-        const outputFilePath = path.join(__dirname, 'data', 'extract', 'pytest_output.txt');
+        const outputFilePath = path.join(__dirname, 'data', 'extract', 'pytest_output.json');
         const config = {
             outputFilePath,
         };

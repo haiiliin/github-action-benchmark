@@ -71,7 +71,7 @@
             }
         },
         {
-            "group": null,
+            "group": "other",
             "name": "test_fib_20",
             "fullname": "bench.py::test_fib_20",
             "params": null,
