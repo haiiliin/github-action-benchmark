@@ -10,6 +10,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
 const github = __importStar(require("@actions/github"));
 const sys = __importStar(require("systeminformation"));
+function precise(num, sfigs = 5) {
+    return Number.parseFloat(`${num}`).toPrecision(sfigs);
+}
 function getHumanReadableUnitValue(seconds) {
     if (seconds < 1.0e-6) {
         return [seconds * 1e9, 'nsec'];
@@ -38,14 +41,7 @@ function getCommit() {
     const id = pr.head.sha;
     const timestamp = pr.head.repo.updated_at;
     const url = `${pr.html_url}/commits/${id}`;
-    const name = pr.head.user.login;
-    const user = {
-        name,
-        username: name,
-    };
     return {
-        author: user,
-        committer: user,
         id,
         message,
         timestamp,
@@ -59,12 +55,13 @@ function extractPytestResult(output) {
         return json.benchmarks.map(bench => {
             const stats = bench.stats;
             const name = bench.fullname;
+            const group = bench.group;
             const value = stats.ops;
             const unit = 'iter/sec';
-            const range = `stddev: ${stats.stddev}`;
+            const range = `stddev: ${precise(stats.stddev)}`;
             const [mean, meanUnit] = getHumanReadableUnitValue(stats.mean);
-            const extra = `mean: ${mean} ${meanUnit}\nrounds: ${stats.rounds}`;
-            return { name, value, unit, range, extra };
+            const extra = `mean: ${precise(mean)} ${meanUnit}\nrounds: ${stats.rounds}`;
+            return { name, value, unit, range, group, extra };
         });
     }
     catch (err) {

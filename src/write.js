@@ -262,7 +262,7 @@ function isRemoteRejectedError(err) {
 }
 async function writeBenchmarkToGitHubPagesWithRetry(bench, config, assets, retry) {
     var _a, _b;
-    const { name, ghPagesBranch, benchmarkDataDirPath, githubToken, autoPush, skipFetchGhPages, maxItemsInChart, } = config;
+    const { name, commitMsgAppend, ghPagesBranch, benchmarkDataDirPath, githubToken, autoPush, skipFetchGhPages, maxItemsInChart, } = config;
     const dataPath = path.join(benchmarkDataDirPath, 'data.js');
     const isPrivateRepo = (_b = (_a = github.context.payload.repository) === null || _a === void 0 ? void 0 : _a.private) !== null && _b !== void 0 ? _b : false;
     if (!skipFetchGhPages && (!isPrivateRepo || githubToken)) {
@@ -279,7 +279,8 @@ async function writeBenchmarkToGitHubPagesWithRetry(bench, config, assets, retry
     await git.cmd('add', dataPath);
     await addFileToGHPages(benchmarkDataDirPath, 'index.html', assets.index);
     await addFileToGHPages(benchmarkDataDirPath, 'benchmark.css', assets.css);
-    await git.cmd('commit', '-m', `add ${name} benchmark result for ${bench.commit.id}`);
+    await addFileToGHPages(benchmarkDataDirPath, 'main.js', assets.js);
+    await git.cmd('commit', '-m', `add ${name} benchmark result for ${bench.commit.id}${commitMsgAppend ? ' ' + commitMsgAppend : ''}`);
     if (githubToken && autoPush) {
         try {
             await git.push(githubToken, ghPagesBranch);
@@ -314,6 +315,7 @@ async function writeBenchmarkToGitHubPages(bench, config) {
     const assets = {
         index: await fs_1.promises.readFile(path.join(__dirname, 'assets/default_index.html'), 'utf8'),
         css: await fs_1.promises.readFile(path.join(__dirname, 'assets/benchmark.css'), 'utf8'),
+        js: await fs_1.promises.readFile(path.join(__dirname, 'assets/main.js'), 'utf8'),
     };
     if (!skipFetchGhPages) {
         await git.cmd('fetch', 'origin', `${ghPagesBranch}:${ghPagesBranch}`);

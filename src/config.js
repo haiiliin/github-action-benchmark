@@ -166,6 +166,7 @@ async function configFromJobInput() {
     const ghPagesBranch = core.getInput('gh-pages-branch');
     let benchmarkDataDirPath = core.getInput('benchmark-data-dir-path');
     const name = core.getInput('name');
+    const commitMsgAppend = core.getInput('commit-msg-append') || undefined;
     const githubToken = core.getInput('github-token') || undefined;
     const autoPush = getBoolInput('auto-push');
     const skipFetchGhPages = getBoolInput('skip-fetch-gh-pages');
@@ -200,6 +201,7 @@ async function configFromJobInput() {
     }
     return {
         name,
+        commitMsgAppend,
         outputFilePath,
         ghPagesBranch,
         benchmarkDataDirPath,
