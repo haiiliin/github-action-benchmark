@@ -13,6 +13,10 @@ export interface DataJson {
     repoUrl: string;
     entries: BenchmarkSuites;
 }
+interface Assets {
+    index: string;
+    css: string;
+}
 
 export const SCRIPT_PREFIX = 'window.BENCHMARK_DATA = ';
 const DEFAULT_DATA_JSON = {
@@ -40,34 +44,18 @@ async function storeDataJs(dataPath: string, data: DataJson) {
     core.debug(`Overwrote ${dataPath} for adding new data`);
 }
 
-async function addIndexHtmlIfNeeded(dir: string) {
-    const indexHtml = path.join(dir, 'index.html');
+async function addFileToGHPages(dir: string, fname: string, text: string) {
+    const filePath = path.join(dir, fname);
     try {
-        await fs.stat(indexHtml);
-        core.debug(`Skipped to create default index.html since it is already existing: ${indexHtml}`);
+        await fs.stat(filePath);
+        core.debug(`Skipping ${fname} creation, since it already exists: ${filePath}`);
         return;
     } catch (_) {
         // Continue
     }
-
-    await fs.copyFile(path.join(__dirname, 'assets/default_index.html'), indexHtml);
-    await git.cmd('add', indexHtml);
-    console.log('Created default index.html at', indexHtml);
-}
-
-async function addCSSIfNeeded(dir: string) {
-    const indexCss = path.join(dir, 'benchmark.css');
-    try {
-        await fs.stat(indexCss);
-        core.debug(`Skipped to create default benchmark.css since it is already existing: ${indexCss}`);
-        return;
-    } catch (_) {
-        // Continue
-    }
-
-    await fs.copyFile(path.join(__dirname, 'assets/benchmark.css'), indexCss);
-    await git.cmd('add', indexCss);
-    console.log('Created default benchmark.css at', indexCss);
+    await fs.writeFile(filePath, text, 'utf8');
+    await git.cmd('add', filePath);
+    console.log(`Created default ${fname} at`, filePath);
 }
 
 interface Alert {
@@ -349,6 +337,7 @@ function isRemoteRejectedError(err: unknown) {
 async function writeBenchmarkToGitHubPagesWithRetry(
     bench: Benchmark,
     config: Config,
+    assets: Assets,
     retry: number,
 ): Promise<Benchmark | null> {
     const {
@@ -380,8 +369,10 @@ async function writeBenchmarkToGitHubPagesWithRetry(
     await storeDataJs(dataPath, data);
 
     await git.cmd('add', dataPath);
-    await addIndexHtmlIfNeeded(benchmarkDataDirPath);
-    await addCSSIfNeeded(benchmarkDataDirPath);
+
+    await addFileToGHPages(benchmarkDataDirPath, 'index.html', assets.index);
+    await addFileToGHPages(benchmarkDataDirPath, 'benchmark.css', assets.css);
+
     await git.cmd('commit', '-m', `add ${name} benchmark result for ${bench.commit.id}`);
 
     if (githubToken && autoPush) {
@@ -405,7 +396,7 @@ async function writeBenchmarkToGitHubPagesWithRetry(
                 core.warning(
                     `Retrying to generate a commit and push to remote ${ghPagesBranch} with retry count ${retry}...`,
                 );
-                return await writeBenchmarkToGitHubPagesWithRetry(bench, config, retry - 1); // Recursively retry
+                return await writeBenchmarkToGitHubPagesWithRetry(bench, config, assets, retry - 1); // Recursively retry
             } else {
                 core.warning(`Failed to add benchmark data to '${name}' data: ${JSON.stringify(bench)}`);
                 throw new Error(
@@ -424,16 +415,26 @@ async function writeBenchmarkToGitHubPagesWithRetry(
 
 async function writeBenchmarkToGitHubPages(bench: Benchmark, config: Config): Promise<Benchmark | null> {
     const { ghPagesBranch, skipFetchGhPages } = config;
+    // note: assets need to be read before switching branch
+    const assets: Assets = {
+        index: await fs.readFile(path.join(__dirname, 'assets/default_index.html'), 'utf8'),
+        css: await fs.readFile(path.join(__dirname, 'assets/benchmark.css'), 'utf8'),
+    };
     if (!skipFetchGhPages) {
         await git.cmd('fetch', 'origin', `${ghPagesBranch}:${ghPagesBranch}`);
     }
     await git.cmd('switch', ghPagesBranch);
+    let output;
     try {
-        return await writeBenchmarkToGitHubPagesWithRetry(bench, config, 10);
+        output = await writeBenchmarkToGitHubPagesWithRetry(bench, config, assets, 10);
+    } catch (err) {
+        console.log(err);
+        throw err;
     } finally {
         // `git switch` does not work for backing to detached head
         await git.cmd('checkout', '-');
     }
+    return output;
 }
 
 async function loadDataJson(jsonPath: string): Promise<DataJson> {

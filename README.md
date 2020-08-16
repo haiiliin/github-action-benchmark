@@ -1,5 +1,5 @@
-GitHub Action for Continuous Benchmarking
-=========================================
+# GitHub Action for Continuous Benchmarking
+
 [![Action Marketplace][release-badge]][marketplace]
 [![Build Status][build-badge]][ci]
 [![codecov][codecov-badge]][codecov]
@@ -26,8 +26,6 @@ This action currently supports the following tools:
 Multiple languages in the same repository are supported for polyglot projects.
 
 [Japanese Blog post](https://rhysd.hatenablog.com/entry/2019/11/11/131505)
-
-
 
 ## Examples
 

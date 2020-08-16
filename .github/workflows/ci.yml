@@ -7,6 +7,32 @@ on:
   pull_request:
 
 jobs:
+
+  unit-tests:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - run: npm run coverage
+      - name: Apply yamllint
+        run: |
+          sudo pip install yamllint
+          yamllint --strict .github/workflows
+      # - uses: codecov/codecov-action@v1
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     yml: .codecov.yml
+
   pytest-benchmark:
     name: Run Pytest benchmark example
     runs-on: ubuntu-latest
@@ -40,60 +66,37 @@ jobs:
           fail-on-alert: true
       - run: node ./scripts/ci_validate_modification.js before_data.js 'Python Benchmark'
 
-  # only-alert-with-cache:
-  #   name: Run alert check with actions/cache
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #     - uses: actions/cache@v1
-  #       with:
-  #         path: ~/.npm
-  #         key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-  #     - run: npm ci
-  #     - run: npm run build
-  #     - uses: actions/setup-go@v1
-  #     - name: Run benchmark
-  #       run: cd examples/go && go test -bench 'BenchmarkFib' | tee output.txt
-  #     - name: Download previous benchmark data
-  #       uses: actions/cache@v1
-  #       with:
-  #         path: ./cache
-  #         key: ${{ runner.os }}-ci-cache-test
-  #     - name: Store benchmark result
-  #       uses: ./
-  #       with:
-  #         name: Alert setup example with cache
-  #         tool: 'go'
-  #         output-file-path: examples/go/output.txt
-  #         external-data-json-path: ./cache/benchmark-data.json
-  #         github-token: ${{ secrets.GITHUB_TOKEN }}
-  #         alert-threshold: '200%'
-  #         comment-on-alert: true
-  #         fail-on-alert: true
-  #         alert-comment-cc-users: '@chrisjsewell'
-
-  unit-tests:
-    name: Run unit tests
+  only-alert-with-cache:
+    name: Run alert check with actions/cache
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-        with:
-          node-version: 12
       - uses: actions/cache@v1
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - run: npm ci
-      - run: npm run lint
       - run: npm run build
-      - run: npm run coverage
-      - name: Apply yamllint
+      - uses: actions/setup-python@v1
+      - name: Run benchmark
         run: |
-          sudo pip install yamllint
-          yamllint --strict .github/workflows
-      # - uses: codecov/codecov-action@v1
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
-      #     yml: .codecov.yml
+          cd examples/pytest
+          pip install -r requirements.txt
+          pytest bench.py --benchmark-json output.json
+      - name: Download previous benchmark data
+        uses: actions/cache@v1
+        with:
+          path: ./cache
+          key: ${{ runner.os }}-ci-cache-test
+      - name: Store benchmark result
+        uses: ./
+        with:
+          name: Alert setup example with cache
+          output-file-path: examples/pytest/output.json
+          external-data-json-path: ./cache/benchmark-data.json
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          alert-threshold: '200%'
+          comment-on-alert: true
+          fail-on-alert: true
+          alert-comment-cc-users: '@chrisjsewell'
