@@ -9,6 +9,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
 const github = __importStar(require("@actions/github"));
+const sys = __importStar(require("systeminformation"));
 function getHumanReadableUnitValue(seconds) {
     if (seconds < 1.0e-6) {
         return [seconds * 1e9, 'nsec'];
@@ -77,7 +78,9 @@ async function extractResult(config) {
         throw new Error(`No benchmark result was found in ${config.outputFilePath}. Benchmark output was '${output}'`);
     }
     const commit = getCommit();
+    const { speed, cores, physicalCores, processors } = await sys.cpu();
     return {
+        cpu: { speed, cores, physicalCores, processors },
         commit,
         date: Date.now(),
         benches,

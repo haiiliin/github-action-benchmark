@@ -13,7 +13,6 @@ const io = __importStar(require("@actions/io"));
 const core = __importStar(require("@actions/core"));
 const github = __importStar(require("@actions/github"));
 const git = __importStar(require("./git"));
-const default_index_html_1 = require("./default_index_html");
 exports.SCRIPT_PREFIX = 'window.BENCHMARK_DATA = ';
 const DEFAULT_DATA_JSON = {
     lastUpdate: 0,
@@ -48,9 +47,23 @@ async function addIndexHtmlIfNeeded(dir) {
     catch (_) {
         // Continue
     }
-    await fs_1.promises.writeFile(indexHtml, default_index_html_1.DEFAULT_INDEX_HTML, 'utf8');
+    await fs_1.promises.copyFile(path.join(__dirname, 'assets/default_index.html'), indexHtml);
     await git.cmd('add', indexHtml);
     console.log('Created default index.html at', indexHtml);
+}
+async function addCSSIfNeeded(dir) {
+    const indexCss = path.join(dir, 'benchmark.css');
+    try {
+        await fs_1.promises.stat(indexCss);
+        core.debug(`Skipped to create default benchmark.css since it is already existing: ${indexCss}`);
+        return;
+    }
+    catch (_) {
+        // Continue
+    }
+    await fs_1.promises.copyFile(path.join(__dirname, 'assets/benchmark.css'), indexCss);
+    await git.cmd('add', indexCss);
+    console.log('Created default benchmark.css at', indexCss);
 }
 function findAlerts(curSuite, prevSuite, threshold) {
     core.debug(`Comparing current:${curSuite.commit.id} and prev:${prevSuite.commit.id} for alert`);
@@ -279,6 +292,7 @@ async function writeBenchmarkToGitHubPagesWithRetry(bench, config, retry) {
     await storeDataJs(dataPath, data);
     await git.cmd('add', dataPath);
     await addIndexHtmlIfNeeded(benchmarkDataDirPath);
+    await addCSSIfNeeded(benchmarkDataDirPath);
     await git.cmd('commit', '-m', `add ${name} benchmark result for ${bench.commit.id}`);
     if (githubToken && autoPush) {
         try {
