@@ -5,6 +5,7 @@ import * as path from 'path';
 
 export interface Config {
     name: string;
+    commitMsgAppend?: string;
     outputFilePath: string;
     ghPagesBranch: string;
     benchmarkDataDirPath: string;
@@ -198,6 +199,7 @@ export async function configFromJobInput(): Promise<Config> {
     const ghPagesBranch: string = core.getInput('gh-pages-branch');
     let benchmarkDataDirPath: string = core.getInput('benchmark-data-dir-path');
     const name: string = core.getInput('name');
+    const commitMsgAppend: string | undefined = core.getInput('commit-msg-append') || undefined;
     const githubToken: string | undefined = core.getInput('github-token') || undefined;
     const autoPush = getBoolInput('auto-push');
     const skipFetchGhPages = getBoolInput('skip-fetch-gh-pages');
@@ -234,6 +236,7 @@ export async function configFromJobInput(): Promise<Config> {
 
     return {
         name,
+        commitMsgAppend,
         outputFilePath,
         ghPagesBranch,
         benchmarkDataDirPath,

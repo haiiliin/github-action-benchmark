@@ -221,7 +221,7 @@ async function main() {
 
     const commitMessageLine = commitLogLines[4];
     const reCommitMessage = new RegExp(
-        `add ${expectedBenchName.replace(/[.*+?^=!:${}()|[\]/\\]/g, '\\$&')} benchmark result for [0-9a-f]+$`,
+        `add ${expectedBenchName.replace(/[.*+?^=!:${}()|[\]/\\]/g, '\\$&')} benchmark result for [0-9a-f]+ append$`,
     );
     if (!reCommitMessage.test(commitMessageLine)) {
         throw new Error(`Unexpected auto commit message in log '${latestCommitLog}'`);

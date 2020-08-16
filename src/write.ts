@@ -343,6 +343,7 @@ async function writeBenchmarkToGitHubPagesWithRetry(
 ): Promise<Benchmark | null> {
     const {
         name,
+        commitMsgAppend,
         ghPagesBranch,
         benchmarkDataDirPath,
         githubToken,
@@ -375,7 +376,11 @@ async function writeBenchmarkToGitHubPagesWithRetry(
     await addFileToGHPages(benchmarkDataDirPath, 'benchmark.css', assets.css);
     await addFileToGHPages(benchmarkDataDirPath, 'main.js', assets.js);
 
-    await git.cmd('commit', '-m', `add ${name} benchmark result for ${bench.commit.id}`);
+    await git.cmd(
+        'commit',
+        '-m',
+        `add ${name} benchmark result for ${bench.commit.id}${commitMsgAppend ? ' ' + commitMsgAppend : ''}`,
+    );
 
     if (githubToken && autoPush) {
         try {
