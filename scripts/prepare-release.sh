@@ -43,16 +43,18 @@ rm -rf .release
 mkdir -p .release
 
 cp action.yml src/*.js package.json package-lock.json .release/
+cp -R src/assets .release/assets
 cp -R node_modules .release/node_modules
 
 git checkout "$version"
 git pull
 git rm -rf --ignore-unmatch node_modules
 rm -rf node_modules  # remove node_modules/.cache
-mkdir -p src
+mkdir -p src/assets
 
 mv .release/action.yml .
 mv .release/*.js ./src/
+mv .release/assets ./src/
 mv .release/*.json .
 mv .release/node_modules .
 
