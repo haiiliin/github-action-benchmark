@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1597588005709,
+  "lastUpdate": 1597622193457,
   "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -432,6 +432,51 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.00024189",
             "group": "mygroup",
             "extra": "mean: 2.2228 msec\nrounds: 511"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.30",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "commit": {
+          "author": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "committer": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "distinct": true,
+          "id": "11d5b2d3af3f5b371d6f57f7eec3033e281d81a3",
+          "message": "👌 IMPROVE: Sub-headings for benchmark groups\n\nAlso allow for xlabel to be by datetime",
+          "timestamp": "2020-08-17T00:56:01+01:00",
+          "tree_id": "f8a3b6f0da879f4c84f35f775d0e88d4887d6d3e",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/11d5b2d3af3f5b371d6f57f7eec3033e281d81a3"
+        },
+        "date": 1597622191797,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 46354.46605105275,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000011320",
+            "group": null,
+            "extra": "mean: 21.573 usec\nrounds: 30675"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 385.2012759136672,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00030507",
+            "group": "mygroup",
+            "extra": "mean: 2.5960 msec\nrounds: 376"
           }
         ]
       }
