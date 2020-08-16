@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1597587743207,
+  "lastUpdate": 1597588005709,
   "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -387,6 +387,51 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.003035213041231874",
             "extra": "mean: 2.5546090640733077 msec\nrounds: 437"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.30",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "commit": {
+          "author": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "committer": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "distinct": true,
+          "id": "97ff6467a4b82bf2e0060becbf62aae3fac7570e",
+          "message": "Update README.md",
+          "timestamp": "2020-08-16T15:26:16+01:00",
+          "tree_id": "b1910720fc9bfb56590d564af0147a17aa3023f7",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/97ff6467a4b82bf2e0060becbf62aae3fac7570e"
+        },
+        "date": 1597588004288,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 56719.20831570076,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000056495",
+            "group": null,
+            "extra": "mean: 17.631 usec\nrounds: 45665"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 449.8896976551883,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00024189",
+            "group": "mygroup",
+            "extra": "mean: 2.2228 msec\nrounds: 511"
           }
         ]
       }
