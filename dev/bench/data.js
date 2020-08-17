@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1597639022168,
+  "lastUpdate": 1597639233430,
   "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -532,7 +532,64 @@ window.BENCHMARK_DATA = {
             "extra": "mean: 4.3566 msec\nrounds: 227"
           }
         ]
+      },
+      {
+        "cpu": {
+          "speed": "2.30",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "commit": {
+          "author": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "committer": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "distinct": true,
+          "id": "77b7292adf8ab2b8e3e47074bffaf1cb03816980",
+          "message": "Update README.md",
+          "timestamp": "2020-08-17T05:40:03+01:00",
+          "tree_id": "fa6f13537b8958f5c3cdee58ee3c24a232be0f07",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/77b7292adf8ab2b8e3e47074bffaf1cb03816980"
+        },
+        "date": 1597639231851,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 47289.53571529898,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000028351",
+            "group": null,
+            "extra": "mean: 21.146 usec\nrounds: 22423"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 395.53825309052803,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00030956",
+            "group": "group1",
+            "extra": "mean: 2.5282 msec\nrounds: 407"
+          },
+          {
+            "name": "bench.py::test_fib_21",
+            "value": 245.7462095565407,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00047215",
+            "group": "group1",
+            "extra": "mean: 4.0692 msec\nrounds: 262"
+          }
+        ]
       }
     ]
-  }
+  },
+  "xAxis": "id",
+  "oneChartGroups": [
+    ""
+  ]
 }
