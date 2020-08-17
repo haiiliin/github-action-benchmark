@@ -87,6 +87,11 @@ export function renderGraph(canvas, dataset, labels, xAxis, alpha = 60, labelStr
                             lines.push(`  ${key}: ${value}`)
                         }
                     }
+                    if (data.extra) {
+                        for (const [key, value] of Object.entries(data.extra)) {
+                            lines.push(`${key}: ${value}`)
+                        }
+                    }
                     return '\n' + lines.join('\n') + '\n';
                 },
                 label: item => {
