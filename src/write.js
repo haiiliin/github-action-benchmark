@@ -17,6 +17,8 @@ exports.SCRIPT_PREFIX = 'window.BENCHMARK_DATA = ';
 const DEFAULT_DATA_JSON = {
     lastUpdate: 0,
     repoUrl: '',
+    xAxis: 'id',
+    oneChartGroups: [],
     entries: {},
 };
 async function loadDataJs(dataPath) {
@@ -37,15 +39,17 @@ async function storeDataJs(dataPath, data) {
     await fs_1.promises.writeFile(dataPath, script, 'utf8');
     core.debug(`Overwrote ${dataPath} for adding new data`);
 }
-async function addFileToGHPages(dir, fname, text) {
+async function addFileToGHPages(dir, fname, text, overwrite) {
     const filePath = path.join(dir, fname);
-    try {
-        await fs_1.promises.stat(filePath);
-        core.debug(`Skipping ${fname} creation, since it already exists: ${filePath}`);
-        return;
-    }
-    catch (_) {
-        // Continue
+    if (!overwrite) {
+        try {
+            await fs_1.promises.stat(filePath);
+            core.debug(`Skipping ${fname} creation, since it already exists: ${filePath}`);
+            return;
+        }
+        catch (_) {
+            // Continue
+        }
     }
     await fs_1.promises.writeFile(filePath, text, 'utf8');
     await git.cmd('add', filePath);
@@ -225,13 +229,15 @@ async function handleAlert(benchName, curSuite, prevSuite, config) {
         }
     }
 }
-function addBenchmarkToDataJson(benchName, bench, data, maxItems) {
+function addBenchmarkToDataJson(benchName, bench, data, config) {
     var _a, _b;
     // eslint-disable-next-line @typescript-eslint/camelcase
     const htmlUrl = (_b = (_a = github.context.payload.repository) === null || _a === void 0 ? void 0 : _a.html_url) !== null && _b !== void 0 ? _b : '';
     let prevBench = null;
     data.lastUpdate = Date.now();
     data.repoUrl = htmlUrl;
+    data.xAxis = config.chartXAxis;
+    data.oneChartGroups = config.oneChartGroups;
     // Add benchmark result
     if (data.entries[benchName] === undefined) {
         data.entries[benchName] = [bench];
@@ -247,9 +253,10 @@ function addBenchmarkToDataJson(benchName, bench, data, maxItems) {
             }
         }
         suites.push(bench);
-        if (maxItems !== null && suites.length > maxItems) {
-            suites.splice(0, suites.length - maxItems);
-            core.debug(`Number of data items for '${benchName}' was truncated to ${maxItems} due to max-items-in-charts`);
+        const { maxItemsInChart } = config;
+        if (maxItemsInChart !== null && suites.length > maxItemsInChart) {
+            suites.splice(0, suites.length - maxItemsInChart);
+            core.debug(`Number of data items for '${benchName}' was truncated to ${maxItemsInChart} due to max-items-in-charts`);
         }
     }
     return prevBench;
@@ -262,7 +269,7 @@ function isRemoteRejectedError(err) {
 }
 async function writeBenchmarkToGitHubPagesWithRetry(bench, config, assets, retry) {
     var _a, _b;
-    const { name, commitMsgAppend, ghPagesBranch, benchmarkDataDirPath, githubToken, autoPush, skipFetchGhPages, maxItemsInChart, } = config;
+    const { name, commitMsgAppend, ghPagesBranch, benchmarkDataDirPath, githubToken, autoPush, skipFetchGhPages, overwriteAssets, } = config;
     const dataPath = path.join(benchmarkDataDirPath, 'data.js');
     const isPrivateRepo = (_b = (_a = github.context.payload.repository) === null || _a === void 0 ? void 0 : _a.private) !== null && _b !== void 0 ? _b : false;
     if (!skipFetchGhPages && (!isPrivateRepo || githubToken)) {
@@ -274,12 +281,13 @@ async function writeBenchmarkToGitHubPagesWithRetry(bench, config, assets, retry
     }
     await io.mkdirP(benchmarkDataDirPath);
     const data = await loadDataJs(dataPath);
-    const prevBench = addBenchmarkToDataJson(name, bench, data, maxItemsInChart);
+    const prevBench = addBenchmarkToDataJson(name, bench, data, config);
     await storeDataJs(dataPath, data);
     await git.cmd('add', dataPath);
-    await addFileToGHPages(benchmarkDataDirPath, 'index.html', assets.index);
-    await addFileToGHPages(benchmarkDataDirPath, 'benchmark.css', assets.css);
-    await addFileToGHPages(benchmarkDataDirPath, 'main.js', assets.js);
+    await addFileToGHPages(benchmarkDataDirPath, 'index.html', assets.index, overwriteAssets);
+    await addFileToGHPages(benchmarkDataDirPath, 'benchmark.css', assets.css, overwriteAssets);
+    await addFileToGHPages(benchmarkDataDirPath, 'main.js', assets.js, overwriteAssets);
+    await addFileToGHPages(benchmarkDataDirPath, 'funcs.js', assets.funcs, overwriteAssets);
     await git.cmd('commit', '-m', `add ${name} benchmark result for ${bench.commit.id}${commitMsgAppend ? ' ' + commitMsgAppend : ''}`);
     if (githubToken && autoPush) {
         try {
@@ -313,9 +321,10 @@ async function writeBenchmarkToGitHubPages(bench, config) {
     const { ghPagesBranch, skipFetchGhPages } = config;
     // note: assets need to be read before switching branch
     const assets = {
-        index: await fs_1.promises.readFile(path.join(__dirname, 'assets/default_index.html'), 'utf8'),
+        index: await fs_1.promises.readFile(path.join(__dirname, 'assets/index.html'), 'utf8'),
         css: await fs_1.promises.readFile(path.join(__dirname, 'assets/benchmark.css'), 'utf8'),
         js: await fs_1.promises.readFile(path.join(__dirname, 'assets/main.js'), 'utf8'),
+        funcs: await fs_1.promises.readFile(path.join(__dirname, 'assets/funcs.js'), 'utf8'),
     };
     if (!skipFetchGhPages) {
         await git.cmd('fetch', 'origin', `${ghPagesBranch}:${ghPagesBranch}`);
@@ -324,10 +333,6 @@ async function writeBenchmarkToGitHubPages(bench, config) {
     let output;
     try {
         output = await writeBenchmarkToGitHubPagesWithRetry(bench, config, assets, 10);
-    }
-    catch (err) {
-        console.log(err);
-        throw err;
     }
     finally {
         // `git switch` does not work for backing to detached head
@@ -348,9 +353,9 @@ async function loadDataJson(jsonPath) {
     }
 }
 async function writeBenchmarkToExternalJson(bench, jsonFilePath, config) {
-    const { name, maxItemsInChart, saveDataFile } = config;
+    const { name, saveDataFile } = config;
     const data = await loadDataJson(jsonFilePath);
-    const prevBench = addBenchmarkToDataJson(name, bench, data, maxItemsInChart);
+    const prevBench = addBenchmarkToDataJson(name, bench, data, config);
     if (!saveDataFile) {
         core.debug('Skipping storing benchmarks in external data file');
         return prevBench;

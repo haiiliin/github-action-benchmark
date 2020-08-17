@@ -10,9 +10,6 @@ inputs:
     description: 'Name of the benchmark. This value must be identical among all benchmarks'
     required: true
     default: 'Benchmark'
-  commit-msg-append:
-    description: 'Append to end of commit message.'
-    required: false
   output-file-path:
     description: 'A path to file which contains the benchmark output'
     required: true
@@ -30,23 +27,26 @@ inputs:
   auto-push:
     description: 'Push GitHub Pages branch to remote automatically. This option requires github-token input'
     required: false
-    default: false
+    default: 'false'
+  commit-msg-append:
+    description: 'Append to end of generated commit message.'
+    required: false
   skip-fetch-gh-pages:
     description: 'Skip pulling GitHub Pages branch before generating an auto commit'
     required: false
-    default: false
+    default: 'false'
   comment-always:
     description: 'Leave a comment with benchmark result comparison. To enable this feature, github-token input must be given as well'
     required: false
-    default: false
+    default: 'false'
   save-data-file:
     description: 'Save the benchmark data to external file'
     required: false
-    default: true
+    default: 'true'
   comment-on-alert:
     description: 'Leave an alert comment when current benchmark result is worse than previous. Threshold is specified with alert-comment-threshold input. To enable this feature, github-token input must be given as well'
     required: false
-    default: false
+    default: 'false'
   alert-threshold:
     description: 'Threshold which determines if an alert should happen or not. Percentage value such as "150%". For example, 150% means that an alert happens when current benchmark result is 1.5x worse than previous'
     required: false
@@ -56,7 +56,7 @@ inputs:
     required: false
     # Note: Set to false by default since this action does not push to remote by default. When workflow
     # fails and auto-push is not set, there is no chance to push the result to remote.
-    default: false
+    default: 'false'
   fail-threshold:
     description: 'Threshold which determines if the current workflow fails. Format is the same as alert-threshold input. If this value is not specified, the same value as alert-threshold is used'
     required: false
@@ -69,6 +69,18 @@ inputs:
   max-items-in-chart:
     description: 'Max data points in a benchmark chart to avoid making the chart too busy. Value must be unsigned integer. No limit by default'
     required: false
+  chart-xaxis:
+    description: 'X-axis labels to use, commit "id" or "date"'
+    required: false
+    default: id
+  one-chart-groups:
+    description: 'Benchmark groups (comma-delimited) whose tests should be plotted together on a single chart'
+    required: false
+    default: ''
+  overwrite-assets:
+    description: 'Whether to overwrite existing HTML/JS/CSS files on GitHub Pages'
+    required: false
+    default: 'true'
 
 runs:
   using: 'node12'

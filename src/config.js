@@ -161,6 +161,15 @@ function validateAlertThreshold(alertThreshold, failThreshold) {
         throw new Error(`'alert-threshold' value must be smaller than 'fail-threshold' value but got ${alertThreshold} > ${failThreshold}`);
     }
 }
+function validateChartXAxis(chartXAxis) {
+    if (chartXAxis === 'id') {
+        return chartXAxis;
+    }
+    if (chartXAxis === 'date') {
+        return chartXAxis;
+    }
+    throw new Error(`'chart-xaxis' value must be 'id' or 'date' but got ${chartXAxis}`);
+}
 async function configFromJobInput() {
     let outputFilePath = core.getInput('output-file-path');
     const ghPagesBranch = core.getInput('gh-pages-branch');
@@ -178,7 +187,10 @@ async function configFromJobInput() {
     const alertCommentCcUsers = getCommaSeparatedInput('alert-comment-cc-users');
     let externalDataJsonPath = core.getInput('external-data-json-path');
     const maxItemsInChart = getUintInput('max-items-in-chart');
+    const chartXAxisValue = core.getInput('chart-xaxis');
+    const oneChartGroups = core.getInput('one-chart-groups').split(',');
     let failThreshold = getPercentageInput('fail-threshold');
+    const overwriteAssets = getBoolInput('overwrite-assets');
     outputFilePath = await validateOutputFilePath(outputFilePath);
     validateGhPagesBranch(ghPagesBranch);
     benchmarkDataDirPath = validateBenchmarkDataDirPath(benchmarkDataDirPath);
@@ -199,6 +211,7 @@ async function configFromJobInput() {
     if (failThreshold === null) {
         failThreshold = alertThreshold;
     }
+    const chartXAxis = validateChartXAxis(chartXAxisValue);
     return {
         name,
         commitMsgAppend,
@@ -217,6 +230,9 @@ async function configFromJobInput() {
         externalDataJsonPath,
         maxItemsInChart,
         failThreshold,
+        chartXAxis,
+        oneChartGroups,
+        overwriteAssets,
     };
 }
 exports.configFromJobInput = configFromJobInput;

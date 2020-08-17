@@ -65,6 +65,12 @@ html {
     word-break: break-word;
     text-align: center;
   }
+  .benchmark-group {
+    font-size: 2rem;
+    font-weight: 400;
+    word-break: break-word;
+    text-align: center;
+  }
   .benchmark-graphs {
     display: flex;
     flex-direction: row;
