@@ -1,5 +1,23 @@
 # GitHub Action for Continuous Benchmarking
 
+This is a fork of `github-action-benchmark`, optimised for `pytest-benchmark` only.
+It is hoped that eventually some/all of the features will be fed upstream:
+
+1. Allow for tests to divided into groups (see [pytest-benchmark markers](https://pytest-benchmark.readthedocs.io/en/latest/usage.html#markers)), with sub-headings.
+2. `one-chart-groups` allow for specific groups to be plotted on the same chart.
+3. Capture of CPU information (shown in tooltip), useful for cross-referencing any changes in results against.
+4. Round values in tooltip to 5 significant figures
+5. Add `chart-xaxis`, to allow chart x-axis to be commit date or ID
+6. Add `commit-msg-append` option , useful for adding e.g. `[ci skip]` to commit message, but not having it in results titles
+7. Removed capture of commit author/committer, since it can be obtained from the commit id/url
+8. Split original HTML index text into files in `src/assets`folder, this allows for,
+9. Add `npm run serve`, for local testing of results page
+10. Add `overwrite-assets` option, as to whether these assets should be overridden.
+
+---
+
+# Original Readme
+
 [![Action Marketplace][release-badge]][marketplace]
 [![Build Status][build-badge]][ci]
 [![codecov][codecov-badge]][codecov]
