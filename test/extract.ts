@@ -101,7 +101,7 @@ describe('extractResult()', function() {
             };
             const bench = await extractResult(config);
 
-            A.equal(bench.commit, dummyWebhookPayload.head_commit);
+            A.deepEqual(bench.commit, dummyWebhookPayload.head_commit);
             A.ok(bench.date <= Date.now(), bench.date.toString());
             A.deepEqual(test.expected, bench.benches);
         });

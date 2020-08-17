@@ -3,9 +3,9 @@
 export function collectBenchesPerTestCasePerGroup(entries) {
     const map = new Map();
     for (const entry of entries) {
-        const { commit, date, tool, benches, cpu } = entry;
+        const { commit, date, benches, cpu, extra } = entry;
         for (const bench of benches) {
-            const result = { commit, date, tool, bench, cpu };
+            const result = { commit, date, bench, cpu, extra };
             const group = bench.group ? bench.group : null
             var gmap = map.get(group);
             if (gmap === undefined) {
