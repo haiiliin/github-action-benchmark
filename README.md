@@ -66,7 +66,6 @@ At bottom of the page, the download button is available for downloading benchmar
 
 ![download button](https://github.com/rhysd/ss/blob/master/github-action-benchmark/download.png?raw=true)
 
-
 ### Alert comment on commit page
 
 This action can raise [an alert comment][alert-comment-example]. to the commit when its benchmark
@@ -86,7 +85,6 @@ continuously.
 
 However, there is no good free tool to watch the performance easily and continuously across languages
 (as far as I looked into). So I built a new tool on top of GitHub Actions.
-
 
 
 ## How to use

@@ -22,6 +22,8 @@ export interface Config {
     externalDataJsonPath: string | undefined;
     maxItemsInChart: number | null;
     chartXAxis: 'id' | 'date';
+    oneChartGroups: string[];
+    overwriteAssets: boolean;
 }
 
 const RE_UINT = /^\d+$/;
@@ -223,7 +225,9 @@ export async function configFromJobInput(): Promise<Config> {
     let externalDataJsonPath: undefined | string = core.getInput('external-data-json-path');
     const maxItemsInChart = getUintInput('max-items-in-chart');
     const chartXAxisValue = core.getInput('chart-xaxis');
+    const oneChartGroups = core.getInput('one-chart-groups').split(',');
     let failThreshold = getPercentageInput('fail-threshold');
+    const overwriteAssets = getBoolInput('overwrite-assets');
 
     outputFilePath = await validateOutputFilePath(outputFilePath);
     validateGhPagesBranch(ghPagesBranch);
@@ -266,5 +270,7 @@ export async function configFromJobInput(): Promise<Config> {
         maxItemsInChart,
         failThreshold,
         chartXAxis,
+        oneChartGroups,
+        overwriteAssets,
     };
 }

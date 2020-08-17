@@ -65,6 +65,7 @@ jobs:
           skip-fetch-gh-pages: true
           fail-on-alert: true
           commit-msg-append: append
+          one-chart-groups: group1
       - run: node ./scripts/ci_validate_modification.js before_data.js 'Python Benchmark'
 
   only-alert-with-cache:

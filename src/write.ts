@@ -12,11 +12,13 @@ export interface DataJson {
     lastUpdate: number;
     repoUrl: string;
     xAxis?: 'id' | 'date';
+    oneChartGroups?: string[];
     entries: BenchmarkSuites;
 }
 interface Assets {
     index: string;
     js: string;
+    funcs: string;
     css: string;
 }
 
@@ -25,6 +27,7 @@ const DEFAULT_DATA_JSON: DataJson = {
     lastUpdate: 0,
     repoUrl: '',
     xAxis: 'id',
+    oneChartGroups: [],
     entries: {},
 };
 
@@ -47,14 +50,16 @@ async function storeDataJs(dataPath: string, data: DataJson) {
     core.debug(`Overwrote ${dataPath} for adding new data`);
 }
 
-async function addFileToGHPages(dir: string, fname: string, text: string) {
+async function addFileToGHPages(dir: string, fname: string, text: string, overwrite: boolean) {
     const filePath = path.join(dir, fname);
-    try {
-        await fs.stat(filePath);
-        core.debug(`Skipping ${fname} creation, since it already exists: ${filePath}`);
-        return;
-    } catch (_) {
-        // Continue
+    if (!overwrite) {
+        try {
+            await fs.stat(filePath);
+            core.debug(`Skipping ${fname} creation, since it already exists: ${filePath}`);
+            return;
+        } catch (_) {
+            // Continue
+        }
     }
     await fs.writeFile(filePath, text, 'utf8');
     await git.cmd('add', filePath);
@@ -298,6 +303,7 @@ function addBenchmarkToDataJson(benchName: string, bench: Benchmark, data: DataJ
     data.lastUpdate = Date.now();
     data.repoUrl = htmlUrl;
     data.xAxis = config.chartXAxis;
+    data.oneChartGroups = config.oneChartGroups;
 
     // Add benchmark result
     if (data.entries[benchName] === undefined) {
@@ -348,6 +354,7 @@ async function writeBenchmarkToGitHubPagesWithRetry(
         githubToken,
         autoPush,
         skipFetchGhPages,
+        overwriteAssets,
     } = config;
     const dataPath = path.join(benchmarkDataDirPath, 'data.js');
     const isPrivateRepo = github.context.payload.repository?.private ?? false;
@@ -370,9 +377,10 @@ async function writeBenchmarkToGitHubPagesWithRetry(
 
     await git.cmd('add', dataPath);
 
-    await addFileToGHPages(benchmarkDataDirPath, 'index.html', assets.index);
-    await addFileToGHPages(benchmarkDataDirPath, 'benchmark.css', assets.css);
-    await addFileToGHPages(benchmarkDataDirPath, 'main.js', assets.js);
+    await addFileToGHPages(benchmarkDataDirPath, 'index.html', assets.index, overwriteAssets);
+    await addFileToGHPages(benchmarkDataDirPath, 'benchmark.css', assets.css, overwriteAssets);
+    await addFileToGHPages(benchmarkDataDirPath, 'main.js', assets.js, overwriteAssets);
+    await addFileToGHPages(benchmarkDataDirPath, 'funcs.js', assets.funcs, overwriteAssets);
 
     await git.cmd(
         'commit',
@@ -422,9 +430,10 @@ async function writeBenchmarkToGitHubPages(bench: Benchmark, config: Config): Pr
     const { ghPagesBranch, skipFetchGhPages } = config;
     // note: assets need to be read before switching branch
     const assets: Assets = {
-        index: await fs.readFile(path.join(__dirname, 'assets/default_index.html'), 'utf8'),
+        index: await fs.readFile(path.join(__dirname, 'assets/index.html'), 'utf8'),
         css: await fs.readFile(path.join(__dirname, 'assets/benchmark.css'), 'utf8'),
         js: await fs.readFile(path.join(__dirname, 'assets/main.js'), 'utf8'),
+        funcs: await fs.readFile(path.join(__dirname, 'assets/funcs.js'), 'utf8'),
     };
     if (!skipFetchGhPages) {
         await git.cmd('fetch', 'origin', `${ghPagesBranch}:${ghPagesBranch}`);
@@ -461,7 +470,6 @@ async function writeBenchmarkToExternalJson(
 ): Promise<Benchmark | null> {
     const { name, saveDataFile } = config;
     const data = await loadDataJson(jsonFilePath);
-    data.xAxis = config.chartXAxis;
     const prevBench = addBenchmarkToDataJson(name, bench, data, config);
 
     if (!saveDataFile) {

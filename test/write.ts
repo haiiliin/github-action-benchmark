@@ -190,6 +190,8 @@ describe('writeBenchmark()', function() {
             maxItemsInChart: null,
             failThreshold: 2.0,
             chartXAxis: 'id',
+            oneChartGroups: [],
+            overwriteAssets: false,
         };
 
         const savedRepository = gitHubContext.payload.repository;
@@ -775,6 +777,7 @@ describe('writeBenchmark()', function() {
                 path.join('data-dir', 'index.html'),
                 path.join('data-dir', 'benchmark.css'),
                 path.join('data-dir', 'main.js'),
+                path.join('data-dir', 'funcs.js'),
                 'new-data-dir',
                 path.join('with-index-html', 'data.js'),
             ]) {
@@ -829,6 +832,8 @@ describe('writeBenchmark()', function() {
             maxItemsInChart: null,
             failThreshold: 2.0,
             chartXAxis: 'id',
+            oneChartGroups: [],
+            overwriteAssets: false,
         };
 
         function gitHistory(
@@ -855,6 +860,7 @@ describe('writeBenchmark()', function() {
                 addIndexHtml ? ['cmd', ['add', path.join(dir, 'index.html')]] : undefined,
                 addIndexHtml ? ['cmd', ['add', path.join(dir, 'benchmark.css')]] : undefined,
                 addIndexHtml ? ['cmd', ['add', path.join(dir, 'main.js')]] : undefined,
+                addIndexHtml ? ['cmd', ['add', path.join(dir, 'funcs.js')]] : undefined,
                 ['cmd', ['commit', '-m', 'add Test benchmark benchmark result for current commit id']],
                 autoPush ? ['push', [token, 'gh-pages']] : undefined,
                 ['cmd', ['checkout', '-']], // Return from gh-pages

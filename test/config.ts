@@ -46,6 +46,7 @@ describe('configFromJobInput()', function() {
         'alert-comment-cc-users': '',
         'external-data-json-path': '',
         'max-items-in-chart': '',
+        'one-chart-groups': '',
         'chart-xaxis': 'id',
     };
 

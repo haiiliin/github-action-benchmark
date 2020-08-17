@@ -29,7 +29,7 @@
     "test/config.ts",
     "test/git.ts",
     "test/write.ts",
-    "test/default_index_html.ts",
+    "test/assets.ts",
     "scripts/ci_validate_modification.ts"
   ]
 }
