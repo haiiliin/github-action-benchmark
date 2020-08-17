@@ -13,8 +13,12 @@ describe('check assets', function() {
         A.ok(s, 'main script');
     });
     it('main.js is valid Javascript', async function() {
-        // Verify HTML syntax
         const js = await fs.readFile(join(__dirname, '../src/assets/main.js'), 'utf8');
+        // Verify JavaScript syntax. It raises an error if invalid
+        JsParser.parse(js, { sourceType: 'module' });
+    });
+    it('funcs.js is valid Javascript', async function() {
+        const js = await fs.readFile(join(__dirname, '../src/assets/funcs.js'), 'utf8');
         // Verify JavaScript syntax. It raises an error if invalid
         JsParser.parse(js, { sourceType: 'module' });
     });
