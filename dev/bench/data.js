@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1597647331467,
+  "lastUpdate": 1597647495959,
   "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark",
   "xAxis": "id",
   "oneChartGroups": [
@@ -764,6 +764,62 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.00030778",
             "group": "group1",
             "extra": "mean: 4.2180 msec\nrounds: 236"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.60",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "extra": {
+          "pythonVersion": "3.8.5"
+        },
+        "commit": {
+          "author": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "committer": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "distinct": true,
+          "id": "4a3689dadbb8ee87e358b6389f045f0ccac2d090",
+          "message": "🐛 FIX: Filter git payload",
+          "timestamp": "2020-08-17T07:57:36+01:00",
+          "tree_id": "73241ee2db1ebf1c8c7298b4c84513b1f5c39e96",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/4a3689dadbb8ee87e358b6389f045f0ccac2d090"
+        },
+        "date": 1597647494488,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 58080.21738710423,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000020856",
+            "group": null,
+            "extra": "mean: 17.218 usec\nrounds: 48539"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 477.70925937567404,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00026035",
+            "group": "group1",
+            "extra": "mean: 2.0933 msec\nrounds: 495"
+          },
+          {
+            "name": "bench.py::test_fib_21",
+            "value": 286.5673723217214,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00046175",
+            "group": "group1",
+            "extra": "mean: 3.4896 msec\nrounds: 318"
           }
         ]
       }
