@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1597642761076,
+  "lastUpdate": 1597643238760,
   "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark",
   "xAxis": "id",
   "oneChartGroups": [
@@ -269,6 +269,59 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.00039932",
             "group": "group1",
             "extra": "mean: 3.9114 msec\nrounds: 247"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.30",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "commit": {
+          "author": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "committer": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "distinct": true,
+          "id": "2eeec7a83b7b4d19f483a3f26e5f5ceaaf7fc3d3",
+          "message": "📚 DOCS: Update README",
+          "timestamp": "2020-08-17T06:45:46+01:00",
+          "tree_id": "d63c3ab52fc00b90354732f1a7f18f58735b73ed",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/2eeec7a83b7b4d19f483a3f26e5f5ceaaf7fc3d3"
+        },
+        "date": 1597643237212,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 48907.58288588315,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000080233",
+            "group": null,
+            "extra": "mean: 20.447 usec\nrounds: 36232"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 397.40919182935903,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00029998",
+            "group": "group1",
+            "extra": "mean: 2.5163 msec\nrounds: 385"
+          },
+          {
+            "name": "bench.py::test_fib_21",
+            "value": 242.42454096479466,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00035821",
+            "group": "group1",
+            "extra": "mean: 4.1250 msec\nrounds: 263"
           }
         ]
       }
