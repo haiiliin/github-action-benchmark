@@ -59,7 +59,7 @@ function renderBenchSetGroups(name, benchSets, main, xAxis, oneChartGroups) {
       const canvas = document.createElement('canvas');
       canvas.className = 'benchmark-chart';
       graphsElem.appendChild(canvas);
-      const uniqueCommits = [...new Set([...benchSet.values()].flat().map((d) => [d.commit.timestamp, d.commit.id]))].sort((a, b) => moment(a[0]).diff(b[0]));
+      const uniqueCommits = [...new Set([...benchSet.values()].flat().map((d) => JSON.stringify([d.commit.timestamp, d.commit.id])))].map(d => JSON.parse(d)).sort((a, b) => moment(a[0]).diff(b[0]));
       const datasets = [...benchSet.entries()].map(l => {
         const lookup = new Map(l[1].map(i => [i.commit.id, i]));
         return {
@@ -87,7 +87,7 @@ function renderBenchSetGroups(name, benchSets, main, xAxis, oneChartGroups) {
   }
 }
 
-function renderAllCharts(dataSets, byDate) {
+function renderAllCharts(dataSets) {
   const main = document.getElementById('main');
   for (const { name, dataSet, xAxis, oneChartGroups } of dataSets) {
     renderBenchSetGroups(name, dataSet, main, xAxis, oneChartGroups);

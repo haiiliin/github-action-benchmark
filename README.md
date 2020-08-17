@@ -86,7 +86,6 @@ continuously.
 However, there is no good free tool to watch the performance easily and continuously across languages
 (as far as I looked into). So I built a new tool on top of GitHub Actions.
 
-
 ## How to use
 
 This action takes a file that contains benchmark output. And it outputs the results to GitHub Pages
