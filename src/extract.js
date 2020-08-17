@@ -30,7 +30,15 @@ function getHumanReadableUnitValue(seconds) {
 function getCommit() {
     /* eslint-disable @typescript-eslint/camelcase */
     if (github.context.payload.head_commit) {
-        return github.context.payload.head_commit;
+        const { id, message, timestamp, url, distinct, tree_id } = github.context.payload.head_commit;
+        const output = { id, message, timestamp, url, distinct, tree_id };
+        if (output.distinct === undefined) {
+            delete output.distinct;
+        }
+        if (output.tree_id === undefined) {
+            delete output.tree_id;
+        }
+        return output;
     }
     const pr = github.context.payload.pull_request;
     if (!pr) {
