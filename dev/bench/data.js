@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1597622193457,
+  "lastUpdate": 1597639022168,
   "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -477,6 +477,59 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.00030507",
             "group": "mygroup",
             "extra": "mean: 2.5960 msec\nrounds: 376"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.30",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "commit": {
+          "author": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "committer": {
+            "email": "chrisj_sewell@hotmail.com",
+            "name": "Chris Sewell",
+            "username": "chrisjsewell"
+          },
+          "distinct": true,
+          "id": "e6a092c6c68cb293d1cee855011e049853a9e00d",
+          "message": "✨ NEW: Plot groups on one chart",
+          "timestamp": "2020-08-17T05:36:31+01:00",
+          "tree_id": "7e20d48b3c7168c5b3bf4890a8d86bbbd5747c4b",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/e6a092c6c68cb293d1cee855011e049853a9e00d"
+        },
+        "date": 1597639020538,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 44633.327550513786,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000015265",
+            "group": null,
+            "extra": "mean: 22.405 usec\nrounds: 33439"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 376.27051884136654,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00018901",
+            "group": "group1",
+            "extra": "mean: 2.6577 msec\nrounds: 378"
+          },
+          {
+            "name": "bench.py::test_fib_21",
+            "value": 229.5354991625579,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00025812",
+            "group": "group1",
+            "extra": "mean: 4.3566 msec\nrounds: 227"
           }
         ]
       }
