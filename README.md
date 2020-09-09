@@ -14,6 +14,27 @@ It is hoped that eventually some/all of the features will be fed upstream:
 9. Split original HTML index text into files in `src/assets`folder, this allows for,
 10. Add `npm run serve`, for local testing of results page
 11. Add `overwrite-assets` option, as to whether these assets should be overridden.
+12. Add `metadata` option, to capture additional information from the github action run (like dependency/docker versions).
+
+## Development Notes
+
+To run the test suite, install the modules, compile the TS and run mocha:
+
+```console
+npm ci
+npm test
+```
+
+You can also get the test coverage: `npm run coverage`
+
+To fix linting issues: `npm run fix`
+
+For developing the webpage and associated JS/CSS, you can serve the assets: `npm serve`.
+Note, that this requires you place a `data.js` object in `src/assets`.
+
+To "release" a GH actions version, you need to create a branch containing all the compiled JS + node_modules.
+To do this (or to update a release branch), first make sure the branch has been created,
+then you can run the script: `./scripts/prepare-release.sh branch-name`.
 
 ---
 
