@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1597647495959,
+  "lastUpdate": 1599661092535,
   "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark",
   "xAxis": "id",
   "oneChartGroups": [
@@ -820,6 +820,52 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.00046175",
             "group": "group1",
             "extra": "mean: 3.4896 msec\nrounds: 318"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.60",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "extra": {
+          "pythonVersion": "3.8.5"
+        },
+        "commit": {
+          "id": "31c388970a00e4a9adcbce9db769803e3b8be65e",
+          "message": "✨ NEW: add `metadata` user option key (#3)",
+          "timestamp": "2020-09-09T15:17:42+01:00",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/31c388970a00e4a9adcbce9db769803e3b8be65e",
+          "distinct": true,
+          "tree_id": "dee82692a0969d3a4e8c18a94b921aeadfe2c669"
+        },
+        "date": 1599661091043,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 50168.235161922436,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000030715",
+            "group": null,
+            "extra": "mean: 19.933 usec\nrounds: 35088"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 419.8305831716742,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00023768",
+            "group": "group1",
+            "extra": "mean: 2.3819 msec\nrounds: 408"
+          },
+          {
+            "name": "bench.py::test_fib_21",
+            "value": 257.63852460719505,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00035743",
+            "group": "group1",
+            "extra": "mean: 3.8814 msec\nrounds: 228"
           }
         ]
       }
