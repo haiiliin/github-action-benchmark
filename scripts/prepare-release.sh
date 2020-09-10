@@ -62,4 +62,4 @@ mv .release/node_modules .
 git add -f action.yml ./src/*.js ./src/assets package.json package-lock.json node_modules
 set +x
 
-echo "Done. Please check 'git diff --cached' to verify changes. If ok, add version tag and push it to remote"
+echo "Done. Please check 'git diff --cached' to verify changes. If ok, commit, push to remote, and add version tag"
