@@ -1,6 +1,6 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1599729169755,
-  "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark",
+  "lastUpdate": 1599732528784,
+  "repoUrl": "https://github.com/aiidateam/github-action-benchmark",
   "xAxis": "id",
   "oneChartGroups": [
     ""
@@ -1004,6 +1004,52 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.00055721",
             "group": "group1",
             "extra": "mean: 4.6443 msec\nrounds: 237"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.60",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "extra": {
+          "pythonVersion": "3.8.5"
+        },
+        "commit": {
+          "id": "df519138952a33e260e0f511f0606e5060c779d3",
+          "message": "🔧 MAINTAIN: Update render config",
+          "timestamp": "2020-09-10T11:08:13+01:00",
+          "url": "https://github.com/aiidateam/github-action-benchmark/commit/df519138952a33e260e0f511f0606e5060c779d3",
+          "distinct": true,
+          "tree_id": "54b004be33a78e5b1279db971bef1212074229d1"
+        },
+        "date": 1599732527106,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 43361.51567721627,
+            "unit": "iter/sec",
+            "range": "stddev: 5.6919e-7",
+            "group": null,
+            "extra": "mean: 23.062 usec\nrounds: 32999"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 354.62001529950146,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000071231",
+            "group": "group1",
+            "extra": "mean: 2.8199 msec\nrounds: 352"
+          },
+          {
+            "name": "bench.py::test_fib_21",
+            "value": 219.3838583502032,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000068885",
+            "group": "group1",
+            "extra": "mean: 4.5582 msec\nrounds: 219"
           }
         ]
       }
