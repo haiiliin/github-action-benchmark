@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1599732699270,
+  "lastUpdate": 1599757433351,
   "repoUrl": "https://github.com/aiidateam/github-action-benchmark",
   "xAxis": "id",
   "oneChartGroups": [
@@ -1096,6 +1096,52 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.00018926",
             "group": "group1",
             "extra": "mean: 4.2304 msec\nrounds: 238"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.30",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "extra": {
+          "pythonVersion": "3.8.5"
+        },
+        "commit": {
+          "id": "e2b6a0ad3cbc037c6b2bebd7fb8717347c4eefd7",
+          "message": "🐛 FIX: legend labels for parametrized tests",
+          "timestamp": "2020-09-10T18:02:34+01:00",
+          "url": "https://github.com/aiidateam/github-action-benchmark/commit/e2b6a0ad3cbc037c6b2bebd7fb8717347c4eefd7",
+          "distinct": true,
+          "tree_id": "51bc63bfd1244f506b01f6ed593baaf44d032744"
+        },
+        "date": 1599757431828,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 51339.53947951488,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000011600",
+            "group": null,
+            "extra": "mean: 19.478 usec\nrounds: 37736"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 418.2779399544371,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00035477",
+            "group": "group1",
+            "extra": "mean: 2.3908 msec\nrounds: 400"
+          },
+          {
+            "name": "bench.py::test_fib_21",
+            "value": 264.67310897787684,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00053827",
+            "group": "group1",
+            "extra": "mean: 3.7782 msec\nrounds: 303"
           }
         ]
       }
