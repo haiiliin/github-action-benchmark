@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1599728348015,
+  "lastUpdate": 1599729169755,
   "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark",
   "xAxis": "id",
   "oneChartGroups": [
@@ -958,6 +958,52 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.00025242",
             "group": "group1",
             "extra": "mean: 4.5058 msec\nrounds: 226"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.40",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "extra": {
+          "pythonVersion": "3.8.5"
+        },
+        "commit": {
+          "id": "6967c77f57b51ac34519ae9a8e69eac2b80c3e3f",
+          "message": "🔧 MAINTAIN: update release script",
+          "timestamp": "2020-09-10T10:11:56+01:00",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/6967c77f57b51ac34519ae9a8e69eac2b80c3e3f",
+          "distinct": true,
+          "tree_id": "9ba37985296e198522eb5e24c650ac8249f853c0"
+        },
+        "date": 1599729167965,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 43504.310420139955,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000012437",
+            "group": null,
+            "extra": "mean: 22.986 usec\nrounds: 30486"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 353.50010861695364,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00032920",
+            "group": "group1",
+            "extra": "mean: 2.8289 msec\nrounds: 308"
+          },
+          {
+            "name": "bench.py::test_fib_21",
+            "value": 215.31554146010012,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00055721",
+            "group": "group1",
+            "extra": "mean: 4.6443 msec\nrounds: 237"
           }
         ]
       }
