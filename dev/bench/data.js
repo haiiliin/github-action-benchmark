@@ -1,9 +1,9 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1599677773319,
+  "lastUpdate": 1599728348015,
   "repoUrl": "https://github.com/chrisjsewell/github-action-benchmark",
   "xAxis": "id",
   "oneChartGroups": [
-    "group1"
+    ""
   ],
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -912,6 +912,52 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.00012580",
             "group": "group1",
             "extra": "mean: 4.3363 msec\nrounds: 235"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.60",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "extra": {
+          "pythonVersion": "3.8.5"
+        },
+        "commit": {
+          "id": "5cce1158e4aec07aa1fbe7b74151021e64f8e4db",
+          "message": "✨ NEW: Add `render-json-path` option (#4)\n\nA JSON file, with configuration for how test suites and groups are rendered.\r\nAlso, improve chart formatting.",
+          "timestamp": "2020-09-10T09:58:41+01:00",
+          "url": "https://github.com/chrisjsewell/github-action-benchmark/commit/5cce1158e4aec07aa1fbe7b74151021e64f8e4db",
+          "distinct": true,
+          "tree_id": "73175805f746b7b054e5d4227acc9b0b769a9629"
+        },
+        "date": 1599728346299,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 43531.57108128924,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000015665",
+            "group": null,
+            "extra": "mean: 22.972 usec\nrounds: 31447"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 357.79829371656103,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00021702",
+            "group": "group1",
+            "extra": "mean: 2.7949 msec\nrounds: 358"
+          },
+          {
+            "name": "bench.py::test_fib_21",
+            "value": 221.9374999783066,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00025242",
+            "group": "group1",
+            "extra": "mean: 4.5058 msec\nrounds: 226"
           }
         ]
       }
