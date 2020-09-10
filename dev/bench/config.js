@@ -1,0 +1,16 @@
+window.CONFIGURATION_DATA = {
+    "suites": {
+        "Python Benchmark with pytest-benchmark": {
+            "header": "Test Suite Title",
+            "description": "Description of test suite."
+        }
+    },
+    "groups": {
+        "group1": {
+            "header": "Group 1 Title",
+            "description": "Description of group 1.",
+            "single_chart": true,
+            "xAxis": "id"
+        }
+    }
+}

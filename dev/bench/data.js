@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1599732528784,
+  "lastUpdate": 1599732699270,
   "repoUrl": "https://github.com/aiidateam/github-action-benchmark",
   "xAxis": "id",
   "oneChartGroups": [
@@ -1050,6 +1050,52 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.0000068885",
             "group": "group1",
             "extra": "mean: 4.5582 msec\nrounds: 219"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.60",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "extra": {
+          "pythonVersion": "3.8.5"
+        },
+        "commit": {
+          "id": "313c8ac8456ccfb427767dabe4df188aca5f07f5",
+          "message": "🔧 MAINTAIN: Update GH action location",
+          "timestamp": "2020-09-10T11:11:04+01:00",
+          "url": "https://github.com/aiidateam/github-action-benchmark/commit/313c8ac8456ccfb427767dabe4df188aca5f07f5",
+          "distinct": true,
+          "tree_id": "1ca8e896f81af333e2957ca72b2aab3daadeacfa"
+        },
+        "date": 1599732697582,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 46342.03040101307,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000020515",
+            "group": null,
+            "extra": "mean: 21.579 usec\nrounds: 31641"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 380.19462938092573,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000099575",
+            "group": "group1",
+            "extra": "mean: 2.6302 msec\nrounds: 364"
+          },
+          {
+            "name": "bench.py::test_fib_21",
+            "value": 236.38527253247292,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00018926",
+            "group": "group1",
+            "extra": "mean: 4.2304 msec\nrounds: 238"
           }
         ]
       }
