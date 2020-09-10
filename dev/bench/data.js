@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1599757433351,
+  "lastUpdate": 1599765938703,
   "repoUrl": "https://github.com/aiidateam/github-action-benchmark",
   "xAxis": "id",
   "oneChartGroups": [
@@ -1142,6 +1142,52 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.00053827",
             "group": "group1",
             "extra": "mean: 3.7782 msec\nrounds: 303"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.60",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "extra": {
+          "pythonVersion": "3.8.5"
+        },
+        "commit": {
+          "id": "6cbdf253ce1b0a70a370740afdac9540df06078a",
+          "message": "👌 IMPROVE: allow configuration of legend alignment",
+          "timestamp": "2020-09-10T20:24:47+01:00",
+          "url": "https://github.com/aiidateam/github-action-benchmark/commit/6cbdf253ce1b0a70a370740afdac9540df06078a",
+          "distinct": true,
+          "tree_id": "1a6c9ac12aa7e302e697dca3bc8e9f12ce562ebd"
+        },
+        "date": 1599765937027,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 45556.521830820035,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000014524",
+            "group": null,
+            "extra": "mean: 21.951 usec\nrounds: 32363"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 369.04365655776274,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000013202",
+            "group": "group1",
+            "extra": "mean: 2.7097 msec\nrounds: 366"
+          },
+          {
+            "name": "bench.py::test_fib_21",
+            "value": 228.03658778641005,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000021708",
+            "group": "group1",
+            "extra": "mean: 4.3853 msec\nrounds: 228"
           }
         ]
       }
