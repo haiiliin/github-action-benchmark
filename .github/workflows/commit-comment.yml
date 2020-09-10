@@ -23,7 +23,7 @@ jobs:
           key: ${{ runner.os }}-benchmark
 
       - name: Store benchmark result
-        uses: chrisjsewell/github-action-benchmark@v2
+        uses: aiidateam/github-action-benchmark@v3
         with:
           name: Alert setup example with cache
           output-file-path: examples/pytest/output.json

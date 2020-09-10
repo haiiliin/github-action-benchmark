@@ -18,7 +18,7 @@ jobs:
           pytest bench.py --benchmark-json output.json
 
       - name: Store benchmark result
-        uses: chrisjsewell/github-action-benchmark@v2
+        uses: aiidateam/github-action-benchmark@v3
         with:
           name: Python Benchmark with pytest-benchmark
           output-file-path: examples/pytest/output.json
