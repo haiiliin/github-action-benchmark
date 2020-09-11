@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1599765938703,
+  "lastUpdate": 1599831117595,
   "repoUrl": "https://github.com/aiidateam/github-action-benchmark",
   "xAxis": "id",
   "oneChartGroups": [
@@ -1188,6 +1188,52 @@ window.BENCHMARK_DATA = {
             "range": "stddev: 0.000021708",
             "group": "group1",
             "extra": "mean: 4.3853 msec\nrounds: 228"
+          }
+        ]
+      },
+      {
+        "cpu": {
+          "speed": "2.30",
+          "cores": 2,
+          "physicalCores": 2,
+          "processors": 1
+        },
+        "extra": {
+          "pythonVersion": "3.8.5"
+        },
+        "commit": {
+          "id": "8b0a284373d24691f26a472da8f6b5c59b364e7b",
+          "message": "👌 IMPROVE: reset zoom button & yAxisFormat\n\nA \"Reset Zoom\" button is added next to charts.\nThe chart configuration code has also been improved,\nso that its easier to extend, and now bith the yAxisFormat and color cycle is configurable per group.",
+          "timestamp": "2020-09-11T14:31:00+01:00",
+          "url": "https://github.com/aiidateam/github-action-benchmark/commit/8b0a284373d24691f26a472da8f6b5c59b364e7b",
+          "distinct": true,
+          "tree_id": "555dd361c88c7161071bd0fa3171f2ae56057e74"
+        },
+        "date": 1599831116017,
+        "benches": [
+          {
+            "name": "bench.py::test_fib_10",
+            "value": 46266.44813298379,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000015441",
+            "group": null,
+            "extra": "mean: 21.614 usec\nrounds: 34247"
+          },
+          {
+            "name": "bench.py::test_fib_20",
+            "value": 367.9926051229763,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00042085",
+            "group": "group1",
+            "extra": "mean: 2.7174 msec\nrounds: 370"
+          },
+          {
+            "name": "bench.py::test_fib_21",
+            "value": 227.30645587712885,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00049293",
+            "group": "group1",
+            "extra": "mean: 4.3993 msec\nrounds: 225"
           }
         ]
       }
