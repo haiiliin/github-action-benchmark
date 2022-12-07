@@ -422,7 +422,7 @@ async function writeBenchmarkToGitHubPagesWithRetry(
 }
 
 async function writeBenchmarkToGitHubPages(bench: Benchmark, config: Config): Promise<Benchmark | null> {
-    const { ghPagesBranch, skipFetchGhPages } = config;
+    const { ghPagesBranch, skipFetchGhPages, githubToken } = config;
     // note: assets need to be read before switching branch
 
     const assets: Assets = {
@@ -437,7 +437,7 @@ async function writeBenchmarkToGitHubPages(bench: Benchmark, config: Config): Pr
         assets['config.js'] = 'window.CONFIGURATION_DATA = {}';
     }
     if (!skipFetchGhPages) {
-        await git.cmd('fetch', 'origin', `${ghPagesBranch}:${ghPagesBranch}`);
+        await git.fetch(githubToken, ghPagesBranch);
     }
     await git.cmd('switch', ghPagesBranch);
     let output;

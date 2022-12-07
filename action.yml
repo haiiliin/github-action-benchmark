@@ -1,4 +1,4 @@
-name: 'Continuous Benchmark'
+name: 'Continuous Benchmark (Fixed for Private Repo)'
 author: 'rhysd <https://rhysd.github.io>'
 description: 'Continuous Benchmark using GitHub pages as dash board for keeping performance'
 branding:
