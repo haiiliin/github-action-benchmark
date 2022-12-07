@@ -85,7 +85,7 @@ async function pull(token, branch, ...options) {
 }
 exports.pull = pull;
 
-export async function fetch(token, branch, ...options) {
+async function fetch(token, branch, ...options) {
     core.debug(`Executing 'git fetch' for branch '${branch}' with token and options '${options.join(' ')}'`);
 
     const remote = token !== undefined ? getRemoteUrl(token) : 'origin';
@@ -96,4 +96,5 @@ export async function fetch(token, branch, ...options) {
 
     return cmd(...args);
 }
+exports.fetch = fetch;
 //# sourceMappingURL=git.js.map
